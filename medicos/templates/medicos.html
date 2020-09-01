@@ -1,0 +1,29 @@
+{% extends "crearmedicos.html" %}
+{% load static %}
+
+{% block content %}
+    <table>
+        <tr>
+            <th>Apellido</th>
+            <th>Nombre</th>
+            <th>Edad</th>
+            <th>Email</th>
+            <th>Sexo</th>
+            <th>Opciones</th>
+        </tr>
+
+        {% for p in medico %}
+
+        <tr>
+            <td>{{ p.apellido }}</td>
+            <td>{{ p.nombre }}</td>
+            <td>{{ p.edad }}</td>
+            <td>{{ p.email }}</td>
+            <td>{{ p.sexo }}</td>
+            <td><a class="nav-link" href="{% url 'modificarmedicos' p.id %}">Modificar</a></td>
+            <td><a class="nav-link" href="{% url 'eliminarmedicos' p.id %}">Eliminar</a></td>
+        </tr>
+
+         {% endfor %}
+    </table>
+  {% endblock %}
