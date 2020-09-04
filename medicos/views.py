@@ -25,15 +25,17 @@ def crearmedicos(request, plantilla="crearmedicos.html"):
 
 #pagina de crear o insertar INSERT
 def modificarmedicos(request, pk, plantilla="modificarmedicos.html"):
-
     if request.method == "POST":
-        form = MedicosForm((request.POST or None))
+        medico = get_object_or_404(Medicos, pk=pk)
+        form = MedicosForm(request.POST or None, instance=medico)
         if form.is_valid():
             form.save()
-            return redirect('medicos')
+        return redirect('medicos')
     else:
         medico = get_object_or_404(Medicos, pk=pk)
         form = MedicosForm(request.POST or None, instance=medico)
+
+
 
     return render(request, plantilla, {'form': form})
 
