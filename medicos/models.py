@@ -161,7 +161,7 @@ class Horario_medico(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
-        db_table = "tr_horario_medico"
+        db_table = "horario_medicos"
         verbose_name = "horario_medico"
         verbose_name_plural = "horario_medicos"
 
