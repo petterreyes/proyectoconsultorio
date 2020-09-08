@@ -1,6 +1,6 @@
 from django import forms
 from .models import Medicos, Usuario, Paciente, Dia_atencion, Horario_atencion, Antecedente, Examen
-from .models import Consulta
+from .models import Consulta, Horario_medico
 
 class MedicosForm(forms.ModelForm):
     class Meta:
@@ -41,3 +41,8 @@ class ConsultaForm(forms.ModelForm):
     class Meta:
         model=Consulta
         fields=['fecha_consulta','motivoconsulta','medico','paciente']
+
+class Horario_medicoForm(forms.ModelForm):
+    class Meta:
+        model=Horario_medico
+        fields=['medico','dia_atencion','horario_atencion']

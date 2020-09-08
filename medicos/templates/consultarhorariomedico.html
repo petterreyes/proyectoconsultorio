@@ -1,0 +1,25 @@
+{% extends "crearhorariomedico.html" %}
+{% load static %}
+
+{% block content %}
+    <table>
+        <tr>
+            <th>Medico</th>
+            <th>Dia de atencion</th>
+            <th>Horario de atencion</th>
+            <th>Opciones</th>
+        </tr>
+
+        {% for p in horariomedico %}
+
+        <tr>
+            <td>{{ p.medico }}</td>
+            <td>{{ p.dia_atencion }}</td>
+            <td>{{ p.horario_atencion}}</td>
+            <td><a class="nav-link" href="{% url 'modificarhorariomedico' p.id %}">Modificar</a></td>
+            <td><a class="nav-link" href="{% url 'eliminarhorariomedico' p.id %}">Eliminar</a></td>
+        </tr>
+
+         {% endfor %}
+    </table>
+  {% endblock %}

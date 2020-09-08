@@ -149,3 +149,19 @@ class Consulta(models.Model):
 
     def __str__(self):
         return self.motivoconsulta
+
+
+class Horario_medico(models.Model):
+    medico = models.ForeignKey(Medicos, on_delete=models.CASCADE)
+    dia_atencion = models.ForeignKey(Dia_atencion, on_delete=models.CASCADE)
+    horario_atencion = models.ForeignKey(Horario_atencion, on_delete=models.CASCADE)
+    #user = models.CharField(max_length=15)
+    #usermod = models.CharField(max_length=15)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = "tr_horario_medico"
+        verbose_name = "horario_medico"
+        verbose_name_plural = "horario_medicos"
+

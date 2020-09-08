@@ -424,3 +424,55 @@ def eliminarconsulta(request, pk, plantilla="eliminarconsulta.html"):
         form = ConsultaForm(request.POST or None, instance=consulta)
 
     return render(request, plantilla, {'form': form})
+
+#horario del medico
+def consultarhorariomedico(request, plantilla="consultarhorariomedico.html"):
+    horariomedico = Horario_medico.objects.all()
+    data = {
+        'horariomedico':horariomedico
+    }
+    return render(request, plantilla, data)
+
+
+#pagina de crear o insertar INSERT
+def crearhorariomedico(request, plantilla="crearhorariomedico.html"):
+
+    if request.method == "POST":
+        form = Horario_medicoForm((request.POST or None))
+        if form.is_valid():
+            form.save()
+            return redirect('horariomedico')
+    else:
+        form = Horario_medicoForm
+
+    return render(request, plantilla, {'form': form})
+
+#pagina de modificar
+def modificarhorariomedico(request, pk, plantilla="modificarhorariomedico.html"):
+    if request.method == "POST":
+        horariomedico = get_object_or_404(Horario_medico, pk=pk)
+        form = Horario_medicoForm(request.POST or None, instance=horariomedico)
+        if form.is_valid():
+            form.save()
+        return redirect('horariomedico')
+    else:
+        horariomedico = get_object_or_404(Horario_medico, pk=pk)
+        form = Horario_medicoForm(request.POST or None, instance=horariomedico)
+
+
+
+    return render(request, plantilla, {'form': form})
+#pagina de eliminar
+def eliminarhorariomedico(request, pk, plantilla="eliminarhorariomedico.html"):
+
+    if request.method == "POST":
+        form = Horario_medicoForm((request.POST or None))
+        horariomedico = get_object_or_404(Horario_medico, pk=pk)
+        if form.is_valid():
+            horariomedico.delete()
+            return redirect('horariomedico')
+    else:
+        horariomedico = get_object_or_404(Horario_medico, pk=pk)
+        form = Horario_medicoForm(request.POST or None, instance=horariomedico)
+
+    return render(request, plantilla, {'form': form})
