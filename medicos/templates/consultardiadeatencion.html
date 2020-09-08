@@ -1,0 +1,21 @@
+{% extends "creardiadeatencion.html" %}
+{% load static %}
+
+{% block content %}
+    <table>
+        <tr>
+            <th>Descripcion del dia</th>
+            <th>Opciones</th>
+        </tr>
+
+        {% for p in diadeatencion %}
+
+        <tr>
+            <td>{{ p.descripcion_dia }}</td>
+            <td><a class="nav-link" href="{% url 'modificardiadeatencion' p.id %}">Modificar</a></td>
+            <td><a class="nav-link" href="{% url 'eliminardiadeatencion' p.id %}">Eliminar</a></td>
+        </tr>
+
+         {% endfor %}
+    </table>
+  {% endblock %}

@@ -1,0 +1,23 @@
+{% extends "crearhorariodeatencion.html" %}
+{% load static %}
+
+{% block content %}
+    <table>
+        <tr>
+            <th>Hora de inicio</th>
+            <th>Hora de fin</th>
+            <th>Opciones</th>
+        </tr>
+
+        {% for p in horariodeatencion %}
+
+        <tr>
+            <td>{{ p.hora_inicio }}</td>
+            <td>{{ p.hora_fin }}</td>
+            <td><a class="nav-link" href="{% url 'modificarhorariodeatencion' p.id %}">Modificar</a></td>
+            <td><a class="nav-link" href="{% url 'eliminarhorariodeatencion' p.id %}">Eliminar</a></td>
+        </tr>
+
+         {% endfor %}
+    </table>
+  {% endblock %}

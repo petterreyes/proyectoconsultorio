@@ -1,0 +1,21 @@
+{% extends "crearantecedentes.html" %}
+{% load static %}
+
+{% block content %}
+    <table>
+        <tr>
+            <th>Descripcion </th>
+            <th>Opciones</th>
+        </tr>
+
+        {% for p in antecedente %}
+
+        <tr>
+            <td>{{ p.descripcion }}</td>
+            <td><a class="nav-link" href="{% url 'modificarantecedentes' p.id %}">Modificar</a></td>
+            <td><a class="nav-link" href="{% url 'eliminarantecedentes' p.id %}">Eliminar</a></td>
+        </tr>
+
+         {% endfor %}
+    </table>
+  {% endblock %}

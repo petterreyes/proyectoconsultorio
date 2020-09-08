@@ -2,10 +2,11 @@
 {% load static %}
 
 {% block content %}
-    <h2>Eliminar medicos</h2>
+    <h2>Crear usuario</h2>
     <form method="POST">
         {% csrf_token %}
             {{ form.as_p }}
-        <input type="submit" value="Eliminar medicos" />
+        <button type="submit" >Crear usuario</button>
     </form>
+
 {% endblock %}

@@ -107,44 +107,30 @@
           <p>Nuestros odontólogos diagnostican, tratan y previenen caries dentales y enfermedades de las encías. Realizan chequeos y revisiones regulares, agujerean, preparan y rellenan cavidades, dientes, dentaduras postizas y otros aparatos, a la vez que ajustan, equilibran y pulen dientes, extraen dientes con caries y asesoran a sus pacientes sobre la higiene bucal. También corrigen irregularidades, tales como dientes torcidos, especialmente en niños. </p>
         </div>
 
-        <div class="row">
 
-          <div class="col-lg-6">
-            <div class="member d-flex align-items-start">
-              <div class="pic"><img src="{% static 'assets/img/doctors/doctor.jpg'%}" class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4>Dr. Tomas Ubilla Gavilanes</h4>
-                <span>Odontologo General</span>
-                <p></p>
-                <div class="social">
-                    <a href="https://www.facebook.com/rocio.gavilanes.756" target="_blank" class="facebook"><i class="icofont-facebook"></i></a>
-                    <a href="https://www.instagram.com/family_dental_solution" target="_blank" class="instagram"><i class="icofont-instagram"></i></a>
-                    <a href="https://api.whatsapp.com/send?phone=+593996696292" target="_blank" class="whatsapp"><i class="icofont-whatsapp"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-6 mt-4 mt-lg-0">
-            <div class="member d-flex align-items-start">
-              <div class="pic"><img src="{% static 'assets/img/doctors/doctor2.jpg'%}" class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4>Maria Gavilanez</h4>
-                <span>Odontologa</span>
-                <p></p>
-                <div class="social">
-                    <a href="https://www.facebook.com/rocio.gavilanes.756" target="_blank" class="facebook"><i class="icofont-facebook"></i></a>
-                    <a href="https://www.instagram.com/family_dental_solution" target="_blank" class="instagram"><i class="icofont-instagram"></i></a>
-                    <a href="https://api.whatsapp.com/send?phone=+593996696292" target="_blank" class="whatsapp"><i class="icofont-whatsapp"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-            <a class="nav-link" href="{% url 'crearmedicos' %}">Crear medico</a>
+            <a class="nav-link" href="{% url 'crearmedicos' %}">Agregar medico</a>
             <a class="nav-link" href="{% url 'medicos' %}">Lista de medicos</a>
 
+            <a class="nav-link" href="{% url 'crearusuario' %}">Agregar usuario</a>
+            <a class="nav-link" href="{% url 'usuario' %}">Lista de usuarios</a>
 
+            <a class="nav-link" href="{% url 'crearpaciente' %}">Agregar paciente</a>
+            <a class="nav-link" href="{% url 'paciente' %}">Lista de paciente</a>
+
+            <a class="nav-link" href="{% url 'creardiadeatencion' %}">Agregar dias</a>
+            <a class="nav-link" href="{% url 'diadeatencion' %}">Lista de dias</a>
+
+            <a class="nav-link" href="{% url 'crearhorariodeatencion' %}">Agregar horario</a>
+            <a class="nav-link" href="{% url 'horariodeatencion' %}">Lista de horario</a>
+
+            <a class="nav-link" href="{% url 'crearantecedentes' %}">Agregar antecedentes</a>
+            <a class="nav-link" href="{% url 'antecedentes' %}">Lista de antecedentes</a>
+
+            <a class="nav-link" href="{% url 'crearexamen' %}">Agregar examen</a>
+            <a class="nav-link" href="{% url 'examen' %}">Lista de examen</a>
+
+            <a class="nav-link" href="{% url 'crearconsulta' %}">Agregar consulta</a>
+            <a class="nav-link" href="{% url 'consulta' %}">Lista de consulta</a>
 
 
         </div>

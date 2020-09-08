@@ -1,0 +1,21 @@
+{% extends "crearexamen.html" %}
+{% load static %}
+
+{% block content %}
+    <table>
+        <tr>
+            <th>Nombre del examen</th>
+            <th>Opciones</th>
+        </tr>
+
+        {% for p in examen %}
+
+        <tr>
+            <td>{{ p.nombre_examen }}</td>
+            <td><a class="nav-link" href="{% url 'modificarexamen' p.id %}">Modificar</a></td>
+            <td><a class="nav-link" href="{% url 'eliminarexamen' p.id %}">Eliminar</a></td>
+        </tr>
+
+         {% endfor %}
+    </table>
+  {% endblock %}

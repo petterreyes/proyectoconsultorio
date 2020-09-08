@@ -1,0 +1,27 @@
+{% extends "crearconsulta.html" %}
+{% load static %}
+
+{% block content %}
+    <table>
+        <tr>
+            <th>Fecha de consulta</th>
+            <th>Motivo de la consulta</th>
+            <th>Medico</th>
+            <th>Paciente</th>
+            <th>Opciones</th>
+        </tr>
+
+        {% for p in consulta %}
+
+        <tr>
+            <td>{{ p.fecha_consulta }}</td>
+            <td>{{ p.motivoconsulta }}</td>
+            <td>{{ p.medico}}</td>
+            <td>{{ p.paciente }}</td>
+            <td><a class="nav-link" href="{% url 'modificarconsulta' p.id %}">Modificar</a></td>
+            <td><a class="nav-link" href="{% url 'eliminarconsulta' p.id %}">Eliminar</a></td>
+        </tr>
+
+         {% endfor %}
+    </table>
+  {% endblock %}
