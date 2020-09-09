@@ -1,0 +1,12 @@
+{% extends "doctores.html" %}
+{% load static %}
+
+{% block content %}
+    <h2>Agregar informacion</h2>
+    <form method="POST">
+        {% csrf_token %}
+            {{ form.as_p }}
+        <button type="submit" >Agregar informacion</button>
+    </form>
+
+{% endblock %}

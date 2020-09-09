@@ -425,6 +425,59 @@ def eliminarconsulta(request, pk, plantilla="eliminarconsulta.html"):
 
     return render(request, plantilla, {'form': form})
 
+
+#examen de consulta
+def consultarexamenconsulta(request, plantilla="consultarexamenconsulta.html"):
+    examenconsulta = Examen_consulta.objects.all()
+    data = {
+        'examenconsulta':examenconsulta
+    }
+    return render(request, plantilla, data)
+
+
+#pagina de crear o insertar INSERT
+def crearexamenconsulta(request, plantilla="crearexamenconsulta.html"):
+
+    if request.method == "POST":
+        form = Examen_consultaForm((request.POST or None))
+        if form.is_valid():
+            form.save()
+            return redirect('examenconsulta')
+    else:
+        form = Examen_consultaForm
+
+    return render(request, plantilla, {'form': form})
+
+#pagina de modificar
+def modificarexamenconsulta(request, pk, plantilla="modificarexamenconsulta.html"):
+    if request.method == "POST":
+        examenconsulta = get_object_or_404(Examen_consulta, pk=pk)
+        form = Examen_consultaForm(request.POST or None, instance=examenconsulta)
+        if form.is_valid():
+            form.save()
+        return redirect('examenconsulta')
+    else:
+        examenconsulta = get_object_or_404(Examen_consulta, pk=pk)
+        form = Examen_consultaForm(request.POST or None, instance=examenconsulta)
+
+
+
+    return render(request, plantilla, {'form': form})
+#pagina de eliminar
+def eliminarexamenconsulta(request, pk, plantilla="eliminarexamenconsulta.html"):
+
+    if request.method == "POST":
+        form = Examen_consultaForm((request.POST or None))
+        examenconsulta = get_object_or_404(Examen_consulta, pk=pk)
+        if form.is_valid():
+            examenconsulta.delete()
+            return redirect('examenconsulta')
+    else:
+        examenconsulta = get_object_or_404(Examen_consulta, pk=pk)
+        form = Examen_consultaForm(request.POST or None, instance=examenconsulta)
+
+    return render(request, plantilla, {'form': form})
+
 #horario del medico
 def consultarhorariomedico(request, plantilla="consultarhorariomedico.html"):
     horariomedico = Horario_medico.objects.all()

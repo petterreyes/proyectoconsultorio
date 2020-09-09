@@ -49,7 +49,13 @@ urlpatterns = [
     path('modificarconsulta/<int:pk>', views.modificarconsulta, name="modificarconsulta"),
     path('eliminarconsulta/<int:pk>', views.eliminarconsulta, name="eliminarconsulta"),
 
-# url de horario del medico
+    # url de examenes de consulta
+    path('examenconsulta/', views.consultarexamenconsulta, name="examenconsulta"),
+    path('crearexamenconsulta/', views.crearexamenconsulta, name="crearexamenconsulta"),
+    path('modificarexamenconsulta/<int:pk>', views.modificarexamenconsulta, name="modificarexamenconsulta"),
+    path('eliminarexamenconsulta/<int:pk>', views.eliminarexamenconsulta, name="eliminarexamenconsulta"),
+
+    # url de horario del medico
     path('horariomedico/', views.consultarhorariomedico, name="horariomedico"),
     path('crearhorariomedico/', views.crearhorariomedico, name="crearhorariomedico"),
     path('modificarhorariomedico/<int:pk>', views.modificarhorariomedico, name="modificarhorariomedico"),

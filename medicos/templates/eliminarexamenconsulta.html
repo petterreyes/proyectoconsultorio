@@ -1,0 +1,11 @@
+{% extends "doctores.html" %}
+{% load static %}
+
+{% block content %}
+    <h2>Eliminar informacion</h2>
+    <form method="POST">
+        {% csrf_token %}
+            {{ form.as_p }}
+        <input type="submit" value="Eliminar informacion" />
+    </form>
+{% endblock %}

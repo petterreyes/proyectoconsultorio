@@ -1,0 +1,26 @@
+{% extends "crearexamenconsulta.html" %}
+{% load static %}
+
+{% block content %}
+    <table>
+        <tr>
+            <th>Descripcion</th>
+            <th>Consulta</th>
+            <th>Examen</th>
+            <th>Opciones</th>
+
+        </tr>
+
+        {% for p in examenconsulta %}
+
+        <tr>
+            <td>{{ p.descripcion }}</td>
+            <td>{{ p.consulta }}</td>
+            <td>{{ p.examen }}</td>
+            <td><a class="nav-link" href="{% url 'modificarexamenconsulta' p.id %}">Modificar</a></td>
+            <td><a class="nav-link" href="{% url 'eliminarexamenconsulta' p.id %}">Eliminar</a></td>
+        </tr>
+
+         {% endfor %}
+    </table>
+  {% endblock %}

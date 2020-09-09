@@ -151,6 +151,23 @@ class Consulta(models.Model):
         return self.motivoconsulta
 
 
+class Examen_consulta(models.Model):
+    descripcion = models.CharField(max_length=200)
+    consulta = models.ForeignKey(Consulta, on_delete=models.CASCADE)
+    examen = models.ForeignKey(Examen, on_delete=models.CASCADE)
+    #user = models.CharField(max_length=15)
+    #usermod = models.CharField(max_length=15)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = "tr_examen_consulta"
+        verbose_name = "examen_consulta"
+        verbose_name_plural = "examen_consultas"
+
+    def __str__(self):
+        return self.descripcion
+
 class Horario_medico(models.Model):
     medico = models.ForeignKey(Medicos, on_delete=models.CASCADE)
     dia_atencion = models.ForeignKey(Dia_atencion, on_delete=models.CASCADE)
