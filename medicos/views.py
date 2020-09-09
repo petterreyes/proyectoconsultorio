@@ -529,3 +529,57 @@ def eliminarreservaciones(request, pk, plantilla="eliminarreservaciones.html"):
         form = ReservacionesForm(request.POST or None, instance=reservaciones)
 
     return render(request, plantilla, {'form': form})
+
+
+
+#examen de consulta
+def consultartratamiento(request, plantilla="consultartratamiento.html"):
+    tratamiento = Tratamiento.objects.all()
+    data = {
+        'tratamiento':tratamiento
+    }
+    return render(request, plantilla, data)
+
+
+#pagina de crear o insertar INSERT
+def creartratamiento(request, plantilla="creartratamiento.html"):
+
+    if request.method == "POST":
+        form = TratamientoForm((request.POST or None))
+        if form.is_valid():
+            form.save()
+            return redirect('tratamiento')
+    else:
+        form = TratamientoForm
+
+    return render(request, plantilla, {'form': form})
+
+#pagina de modificar
+def modificartratamiento(request, pk, plantilla="modificartratamiento.html"):
+    if request.method == "POST":
+        tratamiento = get_object_or_404(Tratamiento, pk=pk)
+        form = TratamientoForm(request.POST or None, instance=tratamiento)
+        if form.is_valid():
+            form.save()
+        return redirect('tratamiento')
+    else:
+        tratamiento = get_object_or_404(Tratamiento, pk=pk)
+        form = TratamientoForm(request.POST or None, instance=tratamiento)
+
+
+
+    return render(request, plantilla, {'form': form})
+#pagina de eliminar
+def eliminartratamiento(request, pk, plantilla="eliminartratamiento.html"):
+
+    if request.method == "POST":
+        form = TratamientoForm((request.POST or None))
+        tratamiento = get_object_or_404(Tratamiento, pk=pk)
+        if form.is_valid():
+            tratamiento.delete()
+            return redirect('tratamiento')
+    else:
+        tratamiento = get_object_or_404(Tratamiento, pk=pk)
+        form = TratamientoForm(request.POST or None, instance=tratamiento)
+
+    return render(request, plantilla, {'form': form})

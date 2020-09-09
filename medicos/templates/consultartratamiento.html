@@ -1,0 +1,27 @@
+{% extends "creartratamiento.html" %}
+{% load static %}
+
+{% block content %}
+    <table>
+        <tr>
+            <th>Fecha de tratamiento</th>
+            <th>Diagnostico</th>
+            <th>Procedimiento</th>
+            <th>Consulta</th>
+            <th>Opciones</th>
+        </tr>
+
+        {% for p in tratamiento %}
+
+        <tr>
+            <td>{{ p.fecha_tratamiento }}</td>
+            <td>{{ p.diagnostico }}</td>
+            <td>{{ p.procedimiento }}</td>
+            <td>{{ p.consulta }}</td>
+            <td><a class="nav-link" href="{% url 'modificartratamiento' p.id %}">Modificar</a></td>
+            <td><a class="nav-link" href="{% url 'eliminartratamiento' p.id %}">Eliminar</a></td>
+        </tr>
+
+         {% endfor %}
+    </table>
+  {% endblock %}

@@ -60,4 +60,10 @@ urlpatterns = [
     path('crearreservaciones/', views.crearreservaciones, name="crearreservaciones"),
     path('modificarreservaciones/<int:pk>', views.modificarreservaciones, name="modificarreservaciones"),
     path('eliminarreservaciones/<int:pk>', views.eliminarreservaciones, name="eliminarreservaciones"),
+
+    # url de tratamiento
+    path('tratamiento/', views.consultartratamiento, name="tratamiento"),
+    path('creartratamiento/', views.creartratamiento, name="creartratamiento"),
+    path('modificartratamiento/<int:pk>', views.modificartratamiento, name="modificartratamiento"),
+    path('eliminartratamiento/<int:pk>', views.eliminartratamiento, name="eliminartratamiento"),
 ]

@@ -1,6 +1,6 @@
 from django import forms
 from .models import Medicos, Usuario, Paciente, Dia_atencion, Horario_atencion, Antecedente, Examen
-from .models import Consulta, Horario_medico,Reservaciones
+from .models import Consulta, Horario_medico,Reservaciones,Tratamiento
 
 class MedicosForm(forms.ModelForm):
     class Meta:
@@ -52,3 +52,9 @@ class ReservacionesForm(forms.ModelForm):
     class Meta:
         model=Reservaciones
         fields=['fecha_ingreso','fecha_reservacion','estado_reservacion','horarios','pacientes','medico', 'usuario']
+
+
+class TratamientoForm(forms.ModelForm):
+    class Meta:
+        model=Tratamiento
+        fields=['fecha_tratamiento','diagnostico','procedimiento','consulta']

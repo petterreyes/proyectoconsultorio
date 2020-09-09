@@ -182,3 +182,21 @@ class Reservaciones(models.Model):
         db_table = "tr_reservaciones"
         verbose_name = "reservacion"
         verbose_name_plural = "reservaciones"
+
+class Tratamiento(models.Model):
+    fecha_tratamiento = models.DateField('fecha que se realiza el tratamiento', blank=False, null=False)
+    diagnostico = models.CharField(max_length=200)
+    procedimiento = models.CharField(max_length=200)
+    consulta = models.ForeignKey(Consulta, on_delete=models.CASCADE)
+    #user = models.CharField(max_length=15)
+    #usermod = models.CharField(max_length=15)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = "tr_tratamiento"
+        verbose_name = "tratamiento"
+        verbose_name_plural = "tratamientos"
+
+    def _str_(self):
+        return self.diagnostico
