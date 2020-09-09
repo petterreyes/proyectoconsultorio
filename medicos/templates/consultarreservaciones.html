@@ -1,0 +1,33 @@
+{% extends "crearreservaciones.html" %}
+{% load static %}
+
+{% block content %}
+    <table>
+        <tr>
+            <th>Fecha de ingreso</th>
+            <th>Fecha de reservacion</th>
+            <th>Estado de reservacion</th>
+            <th>Horarios</th>
+            <th>Pacientes</th>
+            <th>Medico</th>
+            <th>Usuario</th>
+            <th>Opciones</th>
+        </tr>
+
+        {% for p in reservaciones %}
+
+        <tr>
+            <td>{{ p.fecha_ingreso }}</td>
+            <td>{{ p.fecha_reservacion }}</td>
+            <td>{{ p.estado_reservacion }}</td>
+            <td>{{ p.horarios }}</td>
+            <td>{{ p.pacientes }}</td>
+            <td>{{ p.medico }}</td>
+            <td>{{ p.usuario }}</td>
+            <td><a class="nav-link" href="{% url 'modificarreservaciones' p.id %}">Modificar</a></td>
+            <td><a class="nav-link" href="{% url 'eliminarreservaciones' p.id %}">Eliminar</a></td>
+        </tr>
+
+         {% endfor %}
+    </table>
+  {% endblock %}

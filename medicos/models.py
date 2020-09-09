@@ -165,3 +165,20 @@ class Horario_medico(models.Model):
         verbose_name = "horario_medico"
         verbose_name_plural = "horario_medicos"
 
+class Reservaciones(models.Model):
+    fecha_ingreso = models.DateField('fecha que ingresa al sistema', blank=False, null=False)
+    fecha_reservacion = models.DateField('fecha que se realiza la reservacion', blank=False, null=False)
+    estado_reservacion = models.IntegerField(default=1)  # 1 si esta activo y 2 si esta eliminado
+    horarios = models.ForeignKey(Horario_medico, on_delete=models.CASCADE)
+    pacientes = models.ForeignKey(Paciente, on_delete=models.CASCADE)
+    medico = models.ForeignKey(Medicos, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    #user = models.CharField(max_length=15)
+    #usermod = models.CharField(max_length=15)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = "tr_reservaciones"
+        verbose_name = "reservacion"
+        verbose_name_plural = "reservaciones"

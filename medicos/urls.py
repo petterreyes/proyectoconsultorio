@@ -54,4 +54,10 @@ urlpatterns = [
     path('crearhorariomedico/', views.crearhorariomedico, name="crearhorariomedico"),
     path('modificarhorariomedico/<int:pk>', views.modificarhorariomedico, name="modificarhorariomedico"),
     path('eliminarhorariomedico/<int:pk>', views.eliminarhorariomedico, name="eliminarhorariomedico"),
+
+# url de reservacions
+    path('reservaciones/', views.consultarreservaciones, name="reservaciones"),
+    path('crearreservaciones/', views.crearreservaciones, name="crearreservaciones"),
+    path('modificarreservaciones/<int:pk>', views.modificarreservaciones, name="modificarreservaciones"),
+    path('eliminarreservaciones/<int:pk>', views.eliminarreservaciones, name="eliminarreservaciones"),
 ]

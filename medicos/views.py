@@ -476,3 +476,56 @@ def eliminarhorariomedico(request, pk, plantilla="eliminarhorariomedico.html"):
         form = Horario_medicoForm(request.POST or None, instance=horariomedico)
 
     return render(request, plantilla, {'form': form})
+
+
+#reservaciones
+def consultarreservaciones(request, plantilla="consultarreservaciones.html"):
+    reservaciones = Reservaciones.objects.all()
+    data = {
+        'reservaciones':reservaciones
+    }
+    return render(request, plantilla, data)
+
+
+#pagina de crear o insertar INSERT
+def crearreservaciones(request, plantilla="crearreservaciones.html"):
+
+    if request.method == "POST":
+        form = ReservacionesForm((request.POST or None))
+        if form.is_valid():
+            form.save()
+            return redirect('reservaciones')
+    else:
+        form = ReservacionesForm
+
+    return render(request, plantilla, {'form': form})
+
+#pagina de modificar
+def modificarreservaciones(request, pk, plantilla="modificarreservaciones.html"):
+    if request.method == "POST":
+        reservaciones = get_object_or_404(Reservaciones, pk=pk)
+        form = ReservacionesForm(request.POST or None, instance=reservaciones)
+        if form.is_valid():
+            form.save()
+        return redirect('reservaciones')
+    else:
+        reservaciones = get_object_or_404(Reservaciones, pk=pk)
+        form = ReservacionesForm(request.POST or None, instance=reservaciones)
+
+
+
+    return render(request, plantilla, {'form': form})
+#pagina de eliminar
+def eliminarreservaciones(request, pk, plantilla="eliminarreservaciones.html"):
+
+    if request.method == "POST":
+        form = ReservacionesForm((request.POST or None))
+        reservaciones = get_object_or_404(Reservaciones, pk=pk)
+        if form.is_valid():
+            reservaciones.delete()
+            return redirect('reservaciones')
+    else:
+        reservaciones = get_object_or_404(Reservaciones, pk=pk)
+        form = ReservacionesForm(request.POST or None, instance=reservaciones)
+
+    return render(request, plantilla, {'form': form})
