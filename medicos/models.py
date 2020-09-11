@@ -182,6 +182,8 @@ class Horario_medico(models.Model):
         verbose_name = "horario_medico"
         verbose_name_plural = "horario_medicos"
 
+
+
 class Reservaciones(models.Model):
     fecha_ingreso = models.DateField('fecha que ingresa al sistema', blank=False, null=False)
     fecha_reservacion = models.DateField('fecha que se realiza la reservacion', blank=False, null=False)
@@ -215,5 +217,5 @@ class Tratamiento(models.Model):
         verbose_name = "tratamiento"
         verbose_name_plural = "tratamientos"
 
-    def _str_(self):
+    def __str__(self):
         return self.diagnostico
