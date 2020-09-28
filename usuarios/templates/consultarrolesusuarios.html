@@ -1,0 +1,52 @@
+{% extends "index.html" %}
+
+
+
+
+{% block content %}
+ <div class="container">
+        <div class="col-md-8" style="margin-top: 70px;">
+
+            <h2> Roles con Usuarios Asociados </h2>
+
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                         <th>Id</th>
+                        <th>Rol</th>
+                        <th>Usuario</th>
+
+                        <th>Editar</th>
+                          <th>Eliminar</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for r in rolesusuarios %}
+                        <tr>
+                         <td>{{ r.id }}</td>
+                            <td>{{ r.rol }}</td>
+                            <td>{{ r.usuario }}</td>
+
+
+                        <td>  <a class="nav-link" href="{% url 'modificar_rol_usuario' r.id  %}">Modificar</a> </td>
+
+                        <td>  <a class="nav-link" href="{% url 'eliminar_rol_usuario' r.id  %}">Eliminar</a> </td>
+
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <a class="nav-link" href="{% url 'crear_rol_usuario' %}">Crear Rol Usuario</a>
+
+
+        </div>
+    </div>
+
+
+
+{% endblock %}

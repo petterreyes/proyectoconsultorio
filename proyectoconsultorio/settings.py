@@ -27,7 +27,7 @@ SECRET_KEY = '$uix7kvi=s&igc7jb$zln@or85b#5899_f!%()6l#=9#$%uo^!'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+AUTH_USER_MODEL = 'usuarios.User'
 
 # Application definition
 

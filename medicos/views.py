@@ -222,8 +222,6 @@ def consultarhorariodeatencion(request, plantilla="consultarhorariodeatencion.ht
         'horariodeatencion':horario_atencion
     }
     return render(request, plantilla, data)
-
-
 #pagina de crear o insertar INSERT
 def crearhorariodeatencion(request, plantilla="crearhorariodeatencion.html"):
 
@@ -236,7 +234,6 @@ def crearhorariodeatencion(request, plantilla="crearhorariodeatencion.html"):
         form = Horario_atencionForm
 
     return render(request, plantilla, {'form': form})
-
 #pagina de modificar
 def modificarhorariodeatencion(request, pk, plantilla="modificarhorariodeatencion.html"):
     if request.method == "POST":
@@ -248,9 +245,6 @@ def modificarhorariodeatencion(request, pk, plantilla="modificarhorariodeatencio
     else:
         horario_atencion = get_object_or_404(Horario_atencion, pk=pk)
         form = Horario_atencionForm(request.POST or None, instance=horario_atencion)
-
-
-
     return render(request, plantilla, {'form': form})
 #pagina de eliminar
 def eliminarhorariodeatencion(request, pk, plantilla="eliminarhorariodeatencion.html"):
@@ -268,6 +262,8 @@ def eliminarhorariodeatencion(request, pk, plantilla="eliminarhorariodeatencion.
     return render(request, plantilla, {'form': form})
 
 
+
+
 #antecedentes
 def consultarantecedentes(request, plantilla="consultarantecedentes.html"):
     antecedente = Antecedente.objects.all()
@@ -275,8 +271,6 @@ def consultarantecedentes(request, plantilla="consultarantecedentes.html"):
         'antecedente':antecedente
     }
     return render(request, plantilla, data)
-
-
 #pagina de crear o insertar INSERT
 def crearantecedentes(request, plantilla="crearantecedentes.html"):
 
@@ -289,7 +283,6 @@ def crearantecedentes(request, plantilla="crearantecedentes.html"):
         form = AntecedenteForm
 
     return render(request, plantilla, {'form': form})
-
 #pagina de modificar
 def modificarantecedentes(request, pk, plantilla="modificarantecedentes.html"):
     if request.method == "POST":
@@ -301,9 +294,6 @@ def modificarantecedentes(request, pk, plantilla="modificarantecedentes.html"):
     else:
         antecedente = get_object_or_404(Antecedente, pk=pk)
         form = AntecedenteForm(request.POST or None, instance=antecedente)
-
-
-
     return render(request, plantilla, {'form': form})
 #pagina de eliminar
 def eliminarantecedentes(request, pk, plantilla="eliminarantecedentes.html"):
@@ -317,8 +307,9 @@ def eliminarantecedentes(request, pk, plantilla="eliminarantecedentes.html"):
     else:
         antecedente = get_object_or_404(Antecedente, pk=pk)
         form = AntecedenteForm(request.POST or None, instance=antecedente)
-
     return render(request, plantilla, {'form': form})
+
+
 
 #examenes
 def consultarexamen(request, plantilla="consultarexamen.html"):
@@ -327,8 +318,6 @@ def consultarexamen(request, plantilla="consultarexamen.html"):
         'examen':examen
     }
     return render(request, plantilla, data)
-
-
 #pagina de crear o insertar INSERT
 def crearexamen(request, plantilla="crearexamen.html"):
 
@@ -339,9 +328,7 @@ def crearexamen(request, plantilla="crearexamen.html"):
             return redirect('examen')
     else:
         form = ExamenForm
-
     return render(request, plantilla, {'form': form})
-
 #pagina de modificar
 def modificarexamen(request, pk, plantilla="modificarexamen.html"):
     if request.method == "POST":
@@ -353,9 +340,6 @@ def modificarexamen(request, pk, plantilla="modificarexamen.html"):
     else:
         examen = get_object_or_404(Examen, pk=pk)
         form = ExamenForm(request.POST or None, instance=examen)
-
-
-
     return render(request, plantilla, {'form': form})
 #pagina de eliminar
 def eliminarexamen(request, pk, plantilla="eliminarexamen.html"):
@@ -373,6 +357,8 @@ def eliminarexamen(request, pk, plantilla="eliminarexamen.html"):
     return render(request, plantilla, {'form': form})
 
 
+
+
 #consulta
 def consultarconsulta(request, plantilla="consultarconsulta.html"):
     consulta = Consulta.objects.all()
@@ -381,10 +367,8 @@ def consultarconsulta(request, plantilla="consultarconsulta.html"):
     }
     return render(request, plantilla, data)
 
-
 #pagina de crear o insertar INSERT
 def crearconsulta(request, plantilla="crearconsulta.html"):
-
     if request.method == "POST":
         form = ConsultaForm((request.POST or None))
         if form.is_valid():
@@ -392,7 +376,6 @@ def crearconsulta(request, plantilla="crearconsulta.html"):
             return redirect('consulta')
     else:
         form = ConsultaForm
-
     return render(request, plantilla, {'form': form})
 
 #pagina de modificar
@@ -406,10 +389,8 @@ def modificarconsulta(request, pk, plantilla="modificarconsulta.html"):
     else:
         consulta = get_object_or_404(Consulta, pk=pk)
         form = ConsultaForm(request.POST or None, instance=consulta)
-
-
-
     return render(request, plantilla, {'form': form})
+
 #pagina de eliminar
 def eliminarconsulta(request, pk, plantilla="eliminarconsulta.html"):
 
@@ -517,7 +498,6 @@ def modificarhorariomedico(request, pk, plantilla="modificarhorariomedico.html")
     return render(request, plantilla, {'form': form})
 #pagina de eliminar
 def eliminarhorariomedico(request, pk, plantilla="eliminarhorariomedico.html"):
-
     if request.method == "POST":
         form = Horario_medicoForm((request.POST or None))
         horariomedico = get_object_or_404(Horario_medico, pk=pk)
@@ -527,7 +507,6 @@ def eliminarhorariomedico(request, pk, plantilla="eliminarhorariomedico.html"):
     else:
         horariomedico = get_object_or_404(Horario_medico, pk=pk)
         form = Horario_medicoForm(request.POST or None, instance=horariomedico)
-
     return render(request, plantilla, {'form': form})
 
 

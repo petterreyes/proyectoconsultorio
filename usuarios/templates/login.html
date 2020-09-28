@@ -1,8 +1,8 @@
 {% extends "index.html" %}
 
 
-{% block headers %}
 
+{% block headers %}
 
     {% if form.errors %}
         <p>Your username and password didn't match. Prueba otra vez</p>
@@ -36,5 +36,5 @@
 
     {# Assumes you setup the password_reset view in your URLconf #}
 {#    <p><a href="{% url 'password_reset' %}">Lost password?</a></p>#}
-
+    <a class="nav-link" href="{% url 'crear_usuario' %}">Crear Nuevo Usuario</a>
 {% endblock %}

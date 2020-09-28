@@ -75,12 +75,10 @@ class Dia_atencion(models.Model):
     #usermod = models.CharField(max_length=15)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-
     class Meta:
         db_table = "tr_dia_atencion"
         verbose_name = "dia_atencion"
         verbose_name_plural = "dia_atenciones"
-
     def __str__(self):
         return self.descripcion_dia
 
@@ -91,7 +89,6 @@ class Horario_atencion(models.Model):
     #usermod = models.CharField(max_length=15)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-
     class Meta:
         db_table = "tr_horario_atencion"
         verbose_name = "horario_atencion"
@@ -122,12 +119,10 @@ class Examen(models.Model):
     #usermod = models.CharField(max_length=15)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-
     class Meta:
         db_table = "tr_examen"
         verbose_name = "examen"
         verbose_name_plural = "examenes"
-
     def __str__(self):
         return self.nombre_examen
 
@@ -146,7 +141,6 @@ class Consulta(models.Model):
         db_table = "tr_consulta"
         verbose_name = "consulta"
         verbose_name_plural = "consultas"
-
     def __str__(self):
         return self.motivoconsulta
 
@@ -167,6 +161,8 @@ class Examen_consulta(models.Model):
 
     def __str__(self):
         return self.descripcion
+
+
 
 class Horario_medico(models.Model):
     medico = models.ForeignKey(Medicos, on_delete=models.CASCADE)
