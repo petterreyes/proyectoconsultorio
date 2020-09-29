@@ -4,7 +4,7 @@
 {% block headers %}
  <form method="post">
         {% csrf_token %}
-       {{ rolForm.as_p  }}
+       {{ form.as_p  }}
 
         <input type="submit" value="eliminar">
         <input type="hidden" name="next" value="{{ next }}">
