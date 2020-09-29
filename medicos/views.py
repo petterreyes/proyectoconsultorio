@@ -67,7 +67,7 @@ def consultarusuario(request, plantilla="consultarusuario.html"):
 
 
 #pagina de crear o insertar INSERT
-def crearusuario(request, plantilla="crearusuario.html"):
+def crearusuario(request, plantilla="crearusuarios.html"):
 
     if request.method == "POST":
         form = UsuarioForm((request.POST or None))

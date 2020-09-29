@@ -44,7 +44,7 @@ class MyUserManager(BaseUserManager):
 class Rol(models.Model):
     nombre=models.CharField(max_length=200)
 
-    def _str_(self):
+    def __str__(self):
         return '{}'.format(self.nombre)
 
 
@@ -71,8 +71,8 @@ class User(AbstractBaseUser):
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email','date_of_birth']
 
-    def _str_(self):
-        return '{} {}'.format(self.username, self.email)
+    def __str__(self):
+        return '{}'.format(self.username)
 
 
     def get_absolute_url(self):
@@ -97,3 +97,7 @@ class User(AbstractBaseUser):
 class RolUsuario(models.Model):
     rol = models.OneToOneField(Rol, on_delete=models.CASCADE)
     usuario = models.OneToOneField(User, on_delete=models.CASCADE)
+
+
+
+

@@ -50,7 +50,6 @@
         <i class="icofont-google-map"></i> Sauces 3 Mz 117 V.30 Guayaquil-Ecuador
       </div>
 
-
      <div class="social-links">
         <a href="https://www.facebook.com/rocio.gavilanes.756" target="_blank" class="facebook"><i class="icofont-facebook"></i></a>
         <a href="https://www.instagram.com/family_dental_solution" target="_blank" class="instagram"><i class="icofont-instagram"></i></a>
@@ -62,6 +61,7 @@
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
+        <h1 class="logo mr-auto"><a href="{% url 'index' %}">Family Dental Solution</a></h1>
         <a class="navbar-brand" href="{%  url 'login' %}"> Bienvenido {% if user %} {{ request.user.username }}
             {{ user.rolusuario.rol }} {% endif %}    </a>
         <a class="navbar-brand" href="{%  url 'logout' %}">Salir</a>
@@ -72,19 +72,17 @@
             <ul>
               <li class="active"><a href="{% url 'index' %}">Inicio</a></li>
               <li class="nav-item">
-                  <a class="nav-link" href="{% url 'acerca' %}">Acerca de nosotros</a></li>
+                  <a class="nav-link" href="{% url 'acerca' %}">Acerca de nosotros</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" href="{% url 'servicios' %}">Servicios</a></li>
+                  <a class="nav-link" href="{% url 'servicios' %}">Servicios</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" href="{% url 'doctores' %}">Doctores</a></li>
+                  <a class="nav-link" href="{% url 'doctores' %}">Doctores</a>
               </li>
               <li class="nav-item">
                   <a class="nav-link" href="{% url "promociones" %}">Promociones</a>
               </li>
-              <li><a href="#contact">Contactenos</a></li>
-                        {% block headers %} {% endblock %}
             </ul>
         </nav><!-- .nav-menu -->
               {% if request.user.is_authenticated %}
@@ -103,12 +101,6 @@
         {% else %}
             <p>Please login to see this page.</p>
         {% endif %}
-              <a class="nav-link" href="{% url 'acerca' %}">Acerca</a>
-              <a class="nav-link" href="{% url 'servicios' %}">Servicios</a>
-              <a class="nav-link" href="{% url 'doctores' %}">Doctores</a>
-              <a class="nav-link" href="{% url "promociones" %}">Promociones</a>
-              <a href="#contact">Contactenos</a>
-              <a href="#appointment" class="appointment-btn scrollto">Haga una cita con nosotros</a>
 
     </div>
   </header><!-- End Header -->
@@ -117,47 +109,35 @@
   <section id="hero" class="d-flex align-items-center">
     <div class="container">
       <h1>Bienvenidos a nuestro sistema web</h1>
-      <h2>Al cuidado de tu sonrisa familiar</h2>
+        <div>
+            <div>
+                {% block headers %}{% endblock %}
+            <div>
+        </div>
     </div>
   </section><!-- End Hero -->
 
   <main id="main">
 
-
   </main>
-
 
   <!-- Contenido -->
 
-    {% block content %}  {% endblock %}
+  {% block content %}  {% endblock %}
 
   <!-- ======= Footer ======= -->
   <footer id="footer">
-
+  <div>
     <div class="footer-top">
       <div class="container">
         <div class="row">
 
-          <div class="col-lg-3 col-md-6 footer-contact">
-            <h3>SOLUDENFASA</h3>
-            <p>
-              Sauces 3, Av. Juan María Egas. Manzana 117, Villa 30. <br>
-              Guayaquil<br>
-              Ecuador<br><br>
-              <strong>Telefono:</strong> 0996696292<br>
-              <strong>Email:</strong> familydentalsolution@gmail.com<br>
-            </p>
-          </div>
 
 
-
-
-            </form>
           </div>
 
         </div>
       </div>
-    </div>
 
     <div class="container d-md-flex py-4">
 
@@ -180,6 +160,7 @@
           <a href="https://api.whatsapp.com/send?phone=+593996696292" target="_blank" class="whatsapp"><i class="icofont-whatsapp"></i></a>
       </div>
     </div>
+  <div>
   </footer><!-- End Footer -->
 
   <div id="preloader"></div>

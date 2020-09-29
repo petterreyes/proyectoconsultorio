@@ -1,8 +1,7 @@
 {% extends "index.html" %}
+{% load static %}
 
-
-
-{% block content %}
+{% block headers %}
  <form method="post">
         {% csrf_token %}
        {{ rolForm.as_p  }}

@@ -58,7 +58,7 @@ def consultarrolesusuarios(request, plantilla="consultarrolesusuarios.html"):
     rolesusuarios = RolUsuario.objects.all
     return render(request, plantilla, {'rolesusuarios':rolesusuarios})
 
-def crearusuario(request, plantilla="crearusuario.html"):
+def crearusuario(request, plantilla="crearusuarios.html"):
     if request.method=="POST":
         form = UserCreationForm(request.POST or None)
         if form.is_valid():
