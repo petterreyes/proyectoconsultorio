@@ -1,7 +1,7 @@
-{% extends "doctores.html" %}
+{% extends "index.html" %}
 {% load static %}
 
-{% block content %}
+{% block headers %}
     <h2>Modificar examen</h2>
     <form method="POST">
         {% csrf_token %}

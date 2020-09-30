@@ -88,14 +88,21 @@
               {% if request.user.is_authenticated %}
               <a class="nav-link" href="{% url 'doctores' %}">Doctores</a>
                     {% if user.rolusuario.rol.nombre == "ADMINISTRADOR" or user.rolusuario.rol == "" %}
-                        <li class="nav-item">
+                        </li>
                             <a class="nav-link" href="{% url 'consultar_usuarios' %}">Usuarios</a>
                         </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="{% url 'consultar_roles' %}">Roles</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'consultar_roles_usuarios' %}">Roles y Usuarios</a>
+                        <a class="nav-link" href="{% url 'consultar_roles_usuarios' %}">Roles y Usuarios</a>
+                        </li>
+                    {% endif %}
+                    {% if user.rolusuario.rol.nombre == "DOCTOR"  %}
+                        </li>
+                            <a class="nav-link" href="{% url 'crearmedicos' %}">Medicos</a>
+                        </li>
+                        <a class="nav-link" href="{% url 'crearpaciente' %}">Paciente</a>
+                        </li>
+                        <a class="nav-link" href="{% url 'creardiadeatencion' %}">Horario de atencion</a>
                         </li>
                     {% endif %}
         {% else %}
