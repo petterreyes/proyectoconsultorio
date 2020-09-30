@@ -128,8 +128,8 @@ class Examen(models.Model):
 
 
 class Consulta(models.Model):
-    fecha_consulta = models.DateField('fecha que se realiza la consulta', blank=False, null=False)
-    motivoconsulta = models.CharField(max_length=200)
+    fecha_consulta = models.DateField('Fecha que se realiza la consulta', blank=False, null=False)
+    motivoconsulta = models.CharField('Motivo de la Consulta',max_length=200)
     medico = models.ForeignKey(Medicos, on_delete=models.CASCADE)
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
     #user = models.CharField(max_length=15)

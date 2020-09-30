@@ -102,9 +102,23 @@
                         </li>
                         <a class="nav-link" href="{% url 'crearpaciente' %}">Paciente</a>
                         </li>
-                        <a class="nav-link" href="{% url 'creardiadeatencion' %}">Horario de atencion</a>
+                        <a class="nav-link" href="{% url 'creardiadeatencion' %}">Días de atencion</a>
                         </li>
+                        <a class="nav-link" href="{% url 'crearhorariodeatencion' %}">Horarios de atencion</a>
                     {% endif %}
+                    {% if user.rolusuario.rol.nombre == "SECRETARI@"  %}
+                        </li>
+                        <a class="nav-link" href="{% url 'crearconsulta' %}">Consulta</a>
+                    {% endif %}
+                    {% if user.rolusuario.rol.nombre == "PACIENTE"%}
+                        </li>
+                        <a class="nav-link" href="{% url 'crearpaciente' %}">Paciente</a>
+                        </li>
+                        <a class="nav-link" href="{% url 'creardiadeatencion' %}">Días de atencion</a>
+                        </li>
+                        <a class="nav-link" href="{% url 'crearhorariodeatencion' %}">Horarios de atencion</a>
+                    {% endif %}
+
         {% else %}
             <p>Please login to see this page.</p>
         {% endif %}
