@@ -64,7 +64,6 @@
         <h1 class="logo mr-auto"><a href="{% url 'index' %}">Family Dental Solution</a></h1>
         <a class="navbar-brand" href="{%  url 'login' %}"> Bienvenido {% if user %} {{ request.user.username }}
             {{ user.rolusuario.rol }} {% endif %}    </a>
-        <a class="navbar-brand" href="{%  url 'logout' %}">Salir</a>
         <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -86,7 +85,6 @@
             </ul>
         </nav><!-- .nav-menu -->
               {% if request.user.is_authenticated %}
-              <a class="nav-link" href="{% url 'doctores' %}">Doctores</a>
                     {% if user.rolusuario.rol.nombre == "ADMINISTRADOR" or user.rolusuario.rol == "" %}
                         </li>
                             <a class="nav-link" href="{% url 'consultar_usuarios' %}">Usuarios</a>
@@ -96,7 +94,7 @@
                         <a class="nav-link" href="{% url 'consultar_roles_usuarios' %}">Roles y Usuarios</a>
                         </li>
                     {% endif %}
-                    {% if user.rolusuario.rol.nombre == "DOCTOR"  %}
+                    {% if user.rolusuario.rol.nombre == "PROGRAMADOR"  %}
                         </li>
                             <a class="nav-link" href="{% url 'crearmedicos' %}">Medicos</a>
                         </li>
@@ -118,6 +116,8 @@
                         </li>
                         <a class="nav-link" href="{% url 'crearhorariodeatencion' %}">Horarios de atencion</a>
                     {% endif %}
+        <a class="navbar-brand" href="{%  url 'logout' %}">Salir</a>
+
 
         {% else %}
             <p>Please login to see this page.</p>
