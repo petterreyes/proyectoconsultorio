@@ -99,6 +99,7 @@
                         <a class="nav-link" href="{% url 'paciente' %}">Paciente</a>
                         <a class="nav-link" href="{% url 'diadeatencion' %}">Días de atencion</a>
                         <a class="nav-link" href="{% url 'horariodeatencion' %}">Horarios de atencion</a>
+                        <a class="nav-link" href="{% url 'tratamiento' %}">Agregar nuevo tratamiento</a>
                     {% endif %}
                     {% if user.rolusuario.rol.nombre == "SECRETARI@"  %}
                         <a class="nav-link" href="{% url 'crearconsulta' %}">Consulta</a>
