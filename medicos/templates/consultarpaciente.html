@@ -1,4 +1,4 @@
-{% extends "crearpaciente.html" %}
+{% extends "index.html" %}
 {% load static %}
 
 {% block headers %}
@@ -34,4 +34,5 @@
 
          {% endfor %}
     </table>
-  {% endblock %}
+    <a class="nav-link" href="{% url 'crearpaciente' %}">Crear paciente</a>
+{% endblock %}

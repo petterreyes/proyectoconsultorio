@@ -2,26 +2,35 @@
 {% load static %}
 
 {% block headers %}
-    <table>
-        <tr>
-            <th>Fecha de consulta</th>
-            <th>Motivo de consulta</th>
-            <th>Medico</th>
-            <th>Paciente</th>
-            <th>Opciones</th>
-        </tr>
+    <div class="container">
+        <div class="col-md-8" style="margin-top: 70px;">
+            <div class="table-responsive">
+                <table>
+                    <tr>
+                       <th>Fecha de consulta</th>
+                      <th>Motivo de la consulta</th>
+                       <th>Medico</th>
+                       <th>Paciente</th>
+                        <th>Opciones</th>
+                  </tr>
 
-        {% for p in consulta %}
+                 {% for p in consulta %}
 
-        <tr>
-            <td>{{ p.fecha_consulta }}</td>
-            <td>{{ p.motivoconsulta }}</td>
-            <td>{{ p.medico}}</td>
-            <td>{{ p.paciente }}</td>
-            <td><a class="nav-link" href="{% url 'modificarconsulta' p.id %}">Modificar</a></td>
-            <td><a class="nav-link" href="{% url 'eliminarconsulta' p.id %}">Eliminar</a></td>
-        </tr>
+                 <tr>
+                       <td>{{ p.fecha_consulta }}</td>
+                       <td>{{ p.motivoconsulta }}</td>
+                      <td>{{ p.medico}}</td>
+                      <td>{{ p.paciente }}</td>
+                      <td><a class="nav-link" href="{% url 'modificarconsulta' p.id %}">Modificar</a></td>
+                      <td><a class="nav-link" href="{% url 'eliminarconsulta' p.id %}">Eliminar</a></td>
+                 </tr>
 
-         {% endfor %}
-    </table>
+                 {% endfor %}
+                </table>
+            </div>
+
+
+        </div>
+    </div>
+    <a class="nav-link" href="{% url 'crearconsulta' %}">Crear consulta</a>
   {% endblock %}
