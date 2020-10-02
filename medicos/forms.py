@@ -5,7 +5,7 @@ from .models import Consulta, Horario_medico,Reservaciones,Tratamiento, Examen_c
 class MedicosForm(forms.ModelForm):
     class Meta:
         model=Medicos
-        fields=['apellido','nombre','edad','email','sexo']
+        fields=['apellido','nombre','especialidad','edad','email','sexo']
 
 class UsuarioForm(forms.ModelForm):
     class Meta:
@@ -56,7 +56,7 @@ class Horario_medicoForm(forms.ModelForm):
 class ReservacionesForm(forms.ModelForm):
     class Meta:
         model=Reservaciones
-        fields=['fecha_ingreso','fecha_reservacion','estado_reservacion','horarios','pacientes','medico', 'usuario']
+        fields=['fecha_ingreso','fecha_reservacion','estado_reservacion','horario','pacientes','medico']
 
 
 class TratamientoForm(forms.ModelForm):

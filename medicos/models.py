@@ -4,6 +4,7 @@ from django.db import models
 class Medicos(models.Model):
     nombre = models.CharField(blank=False, max_length=200)
     apellido = models.CharField(max_length=200)
+    especialidad = models.CharField(max_length=200)
     edad = models.IntegerField()
     email = models.EmailField()
     sexo = models.CharField(max_length=1)
@@ -19,7 +20,7 @@ class Medicos(models.Model):
         verbose_name_plural = "medicos"
 
     def __str__(self):
-        return self.apellido + ' ' + self.nombre
+        return self.apellido + ' ' + self.nombre + ' ' + self.especialidad
 
 
 
@@ -180,14 +181,14 @@ class Horario_medico(models.Model):
 
 
 
+
 class Reservaciones(models.Model):
     fecha_ingreso = models.DateField('fecha que ingresa al sistema', blank=False, null=False)
     fecha_reservacion = models.DateField('fecha que se realiza la reservacion', blank=False, null=False)
     estado_reservacion = models.IntegerField(default=1)  # 1 si esta activo y 2 si esta eliminado
-    horarios = models.ForeignKey(Horario_medico, on_delete=models.CASCADE)
+    horario = models.CharField(max_length=20)
     pacientes = models.ForeignKey(Paciente, on_delete=models.CASCADE)
     medico = models.ForeignKey(Medicos, on_delete=models.CASCADE)
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     #user = models.CharField(max_length=15)
     #usermod = models.CharField(max_length=15)
     created = models.DateTimeField(auto_now_add=True)
@@ -197,6 +198,7 @@ class Reservaciones(models.Model):
         db_table = "tr_reservaciones"
         verbose_name = "reservacion"
         verbose_name_plural = "reservaciones"
+
 
 class Tratamiento(models.Model):
     fecha_tratamiento = models.DateField('fecha que se realiza el tratamiento', blank=False, null=False)

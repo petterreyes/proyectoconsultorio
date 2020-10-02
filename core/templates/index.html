@@ -116,13 +116,9 @@
                         </li>
                         <a class="nav-link" href="{% url 'crearhorariodeatencion' %}">Horarios de atencion</a>
                     {% endif %}
-                    {% if user.rolusuario.rol.nombre == "PACIENTE"%}
-                        </li>
-                        <a class="nav-link" href="{% url 'crearpaciente' %}">Paciente</a>
-                        </li>
-                        <a class="nav-link" href="{% url 'creardiadeatencion' %}">Días de atencion</a>
-                        </li>
-                        <a class="nav-link" href="{% url 'crearhorariodeatencion' %}">Horarios de atencion</a>
+                    {% if user.rolusuario.rol.nombre == "RECEPCION"%}
+                        <a class="nav-link" href="{% url 'consulta' %}">Registro de consulta</a>
+                        <a class="nav-link" href="{% url 'reservaciones' %}">Agendar Cita</a>
                     {% endif %}
         <a class="navbar-brand" href="{%  url 'logout' %}">Salir</a>
 
