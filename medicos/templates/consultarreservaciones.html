@@ -7,8 +7,8 @@
             <div class="table-responsive">
                 <table>
                     <tr>
-                        <th>Fecha de ingreso</th>
                         <th>Fecha de reservacion</th>
+                        <th>Fecha de ingreso</th>
                         <th>Estado de reservacion</th>
                         <th>Horario</th>
                         <th>Pacientes</th>
@@ -19,8 +19,8 @@
                     {% for p in reservaciones %}
 
                     <tr>
-                            <td>{{ p.fecha_ingreso }}</td>
                             <td>{{ p.fecha_reservacion }}</td>
+                            <td>{{ p.fecha_ingreso }}</td>
                             <td>{{ p.estado_reservacion }}</td>
                             <td>{{ p.horario }}</td>
                             <td>{{ p.pacientes }}</td>

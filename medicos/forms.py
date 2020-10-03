@@ -56,10 +56,10 @@ class Horario_medicoForm(forms.ModelForm):
 class ReservacionesForm(forms.ModelForm):
     class Meta:
         model=Reservaciones
-        fields=['fecha_ingreso','fecha_reservacion','estado_reservacion','horario','pacientes','medico']
+        fields=['fecha_reservacion','fecha_ingreso','estado_reservacion','horario','pacientes','medico']
 
 
 class TratamientoForm(forms.ModelForm):
     class Meta:
         model=Tratamiento
-        fields=['fecha_tratamiento','diagnostico','procedimiento','consulta']
+        fields=['fecha_tratamiento','diagnostico','procedimiento','consulta','medico']

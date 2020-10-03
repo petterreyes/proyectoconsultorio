@@ -8,6 +8,7 @@
             <th>Diagnostico</th>
             <th>Procedimiento</th>
             <th>Consulta</th>
+            <th>Medico</th>
             <th>Opciones</th>
         </tr>
 
@@ -18,6 +19,7 @@
             <td>{{ p.diagnostico }}</td>
             <td>{{ p.procedimiento }}</td>
             <td>{{ p.consulta }}</td>
+            <td>{{ p.medico }}</td>
             <td><a class="nav-link" href="{% url 'modificartratamiento' p.id %}">Modificar</a></td>
             <td><a class="nav-link" href="{% url 'eliminartratamiento' p.id %}">Eliminar</a></td>
         </tr>
