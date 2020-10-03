@@ -91,14 +91,11 @@
                             <a class="nav-link" href="{% url 'consultar_roles' %}">Roles</a>
                         <a class="nav-link" href="{% url 'consultar_roles_usuarios' %}">Roles y Usuarios</a>
                     {% endif %}
-                    {% if user.rolusuario.rol.nombre == "DOCTOR"  %}
+                    {% if user.rolusuario.rol.nombre == "ODONTOLOGO"  %}
                         <a class="nav-link" href="{% url 'paciente' %}">Paciente</a>
                         <a class="nav-link" href="{% url 'diadeatencion' %}">Días de atencion</a>
                         <a class="nav-link" href="{% url 'horariodeatencion' %}">Horarios de atencion</a>
                         <a class="nav-link" href="{% url 'tratamiento' %}">Agregar nuevo tratamiento</a>
-                    {% endif %}
-                    {% if user.rolusuario.rol.nombre == "SECRETARI@"  %}
-                        <a class="nav-link" href="{% url 'crearconsulta' %}">Consulta</a>
                     {% endif %}
                     {% if user.rolusuario.rol.nombre == "AUXILIAR"%}
                         <a class="nav-link" href="{% url 'paciente' %}">Paciente</a>
@@ -107,10 +104,11 @@
                         <a class="nav-link" href="{% url 'examenconsulta' %}">Agregar examenconsulta</a>
 
                     {% endif %}
-                    {% if user.rolusuario.rol.nombre == "PACIENTE"%}
-                        <a class="nav-link" href="{% url 'crearpaciente' %}">Paciente</a>
-                        <a class="nav-link" href="{% url 'creardiadeatencion' %}">Días de atencion</a>
-                        <a class="nav-link" href="{% url 'crearhorariodeatencion' %}">Horarios de atencion</a>
+                    {% if user.rolusuario.rol.nombre == "ODONTOPEDIATRA"  %}
+                        <a class="nav-link" href="{% url 'paciente' %}">Paciente</a>
+                        <a class="nav-link" href="{% url 'diadeatencion' %}">Días de atencion</a>
+                        <a class="nav-link" href="{% url 'horariodeatencion' %}">Horarios de atencion</a>
+                        <a class="nav-link" href="{% url 'tratamiento' %}">Agregar nuevo tratamiento</a>
                     {% endif %}
                     {% if user.rolusuario.rol.nombre == "RECEPCION"%}
                         <a class="nav-link" href="{% url 'consulta' %}">Registro de consulta</a>
