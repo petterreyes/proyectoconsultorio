@@ -85,15 +85,10 @@
             </ul>
         </nav><!-- .nav-menu -->
               {% if request.user.is_authenticated %}
-                        <a class="nav-link" href="{% url 'doctores' %}">Doctores</a>
                     {% if user.rolusuario.rol.nombre == "ADMINISTRADOR" or user.rolusuario.rol == "" %}
-                        </li>
                             <a class="nav-link" href="{% url 'consultar_usuarios' %}">Usuarios</a>
-                        </li>
                             <a class="nav-link" href="{% url 'consultar_roles' %}">Roles</a>
-                        </li>
                         <a class="nav-link" href="{% url 'consultar_roles_usuarios' %}">Roles y Usuarios</a>
-                        </li>
                     {% endif %}
                     {% if user.rolusuario.rol.nombre == "DOCTOR"  %}
                         <a class="nav-link" href="{% url 'paciente' %}">Paciente</a>
@@ -104,17 +99,16 @@
                     {% if user.rolusuario.rol.nombre == "SECRETARI@"  %}
                         <a class="nav-link" href="{% url 'crearconsulta' %}">Consulta</a>
                     {% endif %}
-                    {% if user.rolusuario.rol.nombre == "MEDICO"%}
-                        <a class="nav-link" href="{% url 'crearpaciente' %}">Paciente</a>
-                        <a class="nav-link" href="{% url 'creardiadeatencion' %}">Días de atencion</a>
-                        <a class="nav-link" href="{% url 'crearhorariodeatencion' %}">Horarios de atencion</a>
+                    {% if user.rolusuario.rol.nombre == "AUXILIAR"%}
+                        <a class="nav-link" href="{% url 'paciente' %}">Paciente</a>
+                        <a class="nav-link" href="{% url 'diadeatencion' %}">Días de atencion</a>
+                        <a class="nav-link" href="{% url 'examen' %}">Agregar examen</a>
+                        <a class="nav-link" href="{% url 'examenconsulta' %}">Agregar examenconsulta</a>
+
                     {% endif %}
                     {% if user.rolusuario.rol.nombre == "PACIENTE"%}
-                        </li>
                         <a class="nav-link" href="{% url 'crearpaciente' %}">Paciente</a>
-                        </li>
                         <a class="nav-link" href="{% url 'creardiadeatencion' %}">Días de atencion</a>
-                        </li>
                         <a class="nav-link" href="{% url 'crearhorariodeatencion' %}">Horarios de atencion</a>
                     {% endif %}
                     {% if user.rolusuario.rol.nombre == "RECEPCION"%}

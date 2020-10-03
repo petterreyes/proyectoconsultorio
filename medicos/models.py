@@ -142,6 +142,7 @@ class Consulta(models.Model):
         db_table = "tr_consulta"
         verbose_name = "consulta"
         verbose_name_plural = "consultas"
+
     def __str__(self):
         return self.motivoconsulta
 
