@@ -7,7 +7,7 @@ class Medicos(models.Model):
     especialidad = models.CharField(max_length=200)
     edad = models.IntegerField()
     email = models.EmailField()
-    sexo = models.CharField(max_length=1)
+    sexo = models.CharField(max_length=21)
     estado = models.IntegerField(default=1) #1 si esta activo y 2 si esta eliminado
     #user = models.CharField(max_length=15)
     #usermod = models.CharField(max_length=15)

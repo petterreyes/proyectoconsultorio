@@ -17,18 +17,11 @@ def medico(request):
             Q(nombre__icontains=buscar) |
             Q(especialidad__icontains=buscar) |
             Q(edad__icontains=buscar) |
-            Q(sexo__icontains=buscar)
+            Q(sexo__icontains=buscar) |
+            Q(email__icontains=buscar)
 
         ).distinct()
 
-    #if 'search' in request.GET:
-        #search_term = request.GET['search']
-        #medico = Medicos.objects.filter(apellido__contains=search_term)
-    #medicos = Medicos.objects.all()
-    #data = {
-    #    'medico':medicos
-    #}
-    #medicos = list(Medicos.objects.all())
     return render(request, 'medicos.html', {'medico':medicos})
 
 
