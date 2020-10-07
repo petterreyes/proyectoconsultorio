@@ -1,14 +1,35 @@
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from .forms import *
 from .models import *
+from django.contrib.auth.decorators import login_required
+from django.db.models import Q
+
 # Create your views here.
 #consulta de medicos
-def medico(request, plantilla="medicos.html"):
+@login_required(None, "", 'login')
+def medico(request):
+    buscar = request.GET.get("buscar")
     medicos = Medicos.objects.all()
-    data = {
-        'medico':medicos
-    }
-    return render(request, plantilla, data)
+
+    if buscar:
+        medicos = Medicos.objects.filter(
+            Q(apellido__icontains=buscar) |
+            Q(nombre__icontains=buscar) |
+            Q(especialidad__icontains=buscar) |
+            Q(edad__icontains=buscar) |
+            Q(sexo__icontains=buscar)
+
+        ).distinct()
+
+    #if 'search' in request.GET:
+        #search_term = request.GET['search']
+        #medico = Medicos.objects.filter(apellido__contains=search_term)
+    #medicos = Medicos.objects.all()
+    #data = {
+    #    'medico':medicos
+    #}
+    #medicos = list(Medicos.objects.all())
+    return render(request, 'medicos.html', {'medico':medicos})
 
 
 #pagina de crear o insertar INSERT

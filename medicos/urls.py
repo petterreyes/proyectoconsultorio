@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from medicos import views
+from .views import medico
 urlpatterns = [
     path('medicos/', views.medico, name="medicos"),
     path('crearmedicos/', views.crearmedicos, name="crearmedicos"),

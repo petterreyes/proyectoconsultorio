@@ -1,8 +1,15 @@
 {% extends "crearmedicos.html" %}
 {% load static %}
 
+
 {% block headers %}
-    <table class="table table-striped table-sm table-hover table-bordered">
+<table class="table table-striped table-sm table-hover table-bordered">
+    <form class="form-control" method="GET" action="{% url 'medicos' %}">
+        <input class="form-control" type="text" placeholder="Buscar..." name="buscar" value="{{ request.GET.buscar }}">
+        <button class="form-control" type="submit">Buscar medico</button>
+    </form>
+
+
         <tr>
             <th>Apellidos</th>
             <th>Nombres</th>
@@ -23,6 +30,9 @@
             <td><a class="nav-link" href="{% url 'modificarmedicos' p.id %}">Modificar</a></td>
             <td><a class="nav-link" href="{% url 'eliminarmedicos' p.id %}">Eliminar</a></td>
         </tr>
+
+
+
 
          {% endfor %}
     </table>
