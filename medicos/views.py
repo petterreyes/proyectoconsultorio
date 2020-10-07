@@ -124,12 +124,24 @@ def eliminarusuario(request, pk, plantilla="eliminarusuario.html"):
     return render(request, plantilla, {'form': form})
 
 #paciente
-def consultarpaciente(request, plantilla="consultarpaciente.html"):
-    paciente = Paciente.objects.all()
-    data = {
-        'paciente':paciente
-    }
-    return render(request, plantilla, data)
+def consultarpaciente(request):
+    buscar = request.GET.get("buscar")
+    pacientes = Paciente.objects.all()
+
+    if buscar:
+        pacientes = Paciente.objects.filter(
+            Q(nombre__icontains=buscar) |
+            Q(apellido__icontains=buscar) |
+            Q(fecha_nacimiento__icontains=buscar) |
+            Q(cedula__icontains=buscar) |
+            Q(edad__icontains = buscar) |
+            Q(email__icontains=buscar) |
+            Q(sexo__icontains=buscar) |
+            Q(estado_civil__icontains=buscar)|
+            Q(telefono__icontains=buscar)
+
+        ).distinct()
+    return render(request, 'consultarpaciente.html', {'paciente':pacientes})
 
 
 #pagina de crear o insertar INSERT
@@ -177,12 +189,16 @@ def eliminarpaciente(request, pk, plantilla="eliminarpaciente.html"):
 
 
 #dia de atencion
-def consultardiadeatencion(request, plantilla="consultardiadeatencion.html"):
-    dia_atencion = Dia_atencion.objects.all()
-    data = {
-        'diadeatencion':dia_atencion
-    }
-    return render(request, plantilla, data)
+def consultardiadeatencion(request):
+    buscar = request.GET.get("buscar")
+    dia= Dia_atencion.objects.all()
+
+    if buscar:
+        dia = Dia_atencion.objects.filter(
+            Q(descripcion_dia__icontains=buscar)
+
+        ).distinct()
+    return render(request, 'consultardiadeatencion.html', {'diadeatencion': dia})
 
 
 #pagina de crear o insertar INSERT
@@ -230,12 +246,18 @@ def eliminardiadeatencion(request, pk, plantilla="eliminardiadeatencion.html"):
 
 
 #horario de atenciones
-def consultarhorariodeatencion(request, plantilla="consultarhorariodeatencion.html"):
-    horario_atencion = Horario_atencion.objects.all()
-    data = {
-        'horariodeatencion':horario_atencion
-    }
-    return render(request, plantilla, data)
+def consultarhorariodeatencion(request):
+    buscar = request.GET.get("buscar")
+    horario = Horario_atencion.objects.all()
+
+    if buscar:
+        horario = Horario_atencion.objects.filter(
+            Q(hora_inicio__icontains=buscar) |
+            Q(hora_fin__icontains=buscar)
+
+        ).distinct()
+    return render(request, 'consultarhorariodeatencion.html', {'horariodeatencion': horario})
+
 #pagina de crear o insertar INSERT
 def crearhorariodeatencion(request, plantilla="crearhorariodeatencion.html"):
 
@@ -279,12 +301,17 @@ def eliminarhorariodeatencion(request, pk, plantilla="eliminarhorariodeatencion.
 
 
 #antecedentes
-def consultarantecedentes(request, plantilla="consultarantecedentes.html"):
-    antecedente = Antecedente.objects.all()
-    data = {
-        'antecedente':antecedente
-    }
-    return render(request, plantilla, data)
+def consultarantecedentes(request):
+    buscar = request.GET.get("buscar")
+    antecedentes = Antecedente.objects.all()
+
+    if buscar:
+        antecedentes = Antecedente.objects.filter(
+            Q(descripcion__icontains=buscar)
+
+        ).distinct()
+    return render(request, 'consultarantecedentes.html', {'antecedentes':antecedentes})
+
 #pagina de crear o insertar INSERT
 def crearantecedentes(request, plantilla="crearantecedentes.html"):
 

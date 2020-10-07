@@ -2,7 +2,12 @@
 {% load static %}
 
 {% block headers %}
-    <table>
+<table class="table table-striped table-sm table-hover table-bordered">
+    <form class="form-control" method="GET" action="{% url 'tratamiento' %}">
+        <input class="form-control" type="text" placeholder="Buscar..." name="buscar" value="{{ request.GET.buscar }}">
+        <button class="form-control" type="submit">Buscar Tratamiento</button>
+    </form>
+
         <tr>
             <th>Fecha de tratamiento</th>
             <th>Diagnostico</th>
