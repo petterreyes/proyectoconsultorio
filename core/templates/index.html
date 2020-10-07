@@ -85,7 +85,7 @@
             </ul>
         </nav><!-- .nav-menu -->
               {% if request.user.is_authenticated %}
-                        <a class="nav-link" href="{% url 'doctores' %}">Doctores</a>
+                    <a class="nav-link" href="{% url 'doctores' %}">Doctores</a>
                     {% if user.rolusuario.rol.nombre == "ADMINISTRADOR" or user.rolusuario.rol == "" %}
                         <a class="nav-link" href="{% url 'medicos' %}">Agregar medicos</a>
                         <a class="nav-link" href="{% url 'consultar_usuarios' %}">Usuarios</a>
@@ -103,7 +103,6 @@
                         <a class="nav-link" href="{% url 'diadeatencion' %}">Días de atencion</a>
                         <a class="nav-link" href="{% url 'examen' %}">Agregar examen</a>
                         <a class="nav-link" href="{% url 'examenconsulta' %}">Agregar examenconsulta</a>
-
                     {% endif %}
                     {% if user.rolusuario.rol.nombre == "ODONTOPEDIATRA"  %}
                         <a class="nav-link" href="{% url 'paciente' %}">Paciente</a>
@@ -112,6 +111,7 @@
                         <a class="nav-link" href="{% url 'tratamiento' %}">Agregar nuevo tratamiento</a>
                     {% endif %}
                     {% if user.rolusuario.rol.nombre == "RECEPCION"%}
+                        <a class="nav-link" href="{% url 'paciente' %}">Paciente</a>
                         <a class="nav-link" href="{% url 'consulta' %}">Registro de consulta</a>
                         <a class="nav-link" href="{% url 'reservaciones' %}">Agendar Cita</a>
                     {% endif %}

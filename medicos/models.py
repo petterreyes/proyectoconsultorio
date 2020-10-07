@@ -199,6 +199,8 @@ class Reservaciones(models.Model):
         db_table = "tr_reservaciones"
         verbose_name = "reservacion"
         verbose_name_plural = "reservaciones"
+        ordering = ['-fecha_reservacion']
+
 
 
 class Tratamiento(models.Model):
@@ -206,6 +208,7 @@ class Tratamiento(models.Model):
     diagnostico = models.CharField(max_length=200)
     procedimiento = models.CharField(max_length=200)
     consulta = models.ForeignKey(Consulta, on_delete=models.CASCADE)
+    medico = models.ForeignKey(Medicos, on_delete=models.CASCADE)
     #user = models.CharField(max_length=15)
     #usermod = models.CharField(max_length=15)
     created = models.DateTimeField(auto_now_add=True)
