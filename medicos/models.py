@@ -165,7 +165,6 @@ class Examen_consulta(models.Model):
         return self.descripcion
 
 
-
 class Horario_medico(models.Model):
     medico = models.ForeignKey(Medicos, on_delete=models.CASCADE)
     dia_atencion = models.ForeignKey(Dia_atencion, on_delete=models.CASCADE)
@@ -179,8 +178,6 @@ class Horario_medico(models.Model):
         db_table = "horario_medicos"
         verbose_name = "horario_medico"
         verbose_name_plural = "horario_medicos"
-
-
 
 
 class Reservaciones(models.Model):

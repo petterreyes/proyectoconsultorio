@@ -213,7 +213,6 @@ def creardiadeatencion(request, plantilla="creardiadeatencion.html"):
         form = Dia_atencionForm
 
     return render(request, plantilla, {'form': form})
-
 #pagina de modificar
 def modificardiadeatencion(request, pk, plantilla="modificardiadeatencion.html"):
     if request.method == "POST":
@@ -310,7 +309,7 @@ def consultarantecedentes(request):
             Q(descripcion__icontains=buscar)
 
         ).distinct()
-    return render(request, 'consultarantecedentes.html', {'antecedentes':antecedentes})
+    return render(request, 'consultarantecedentes.html', {'antecedente':antecedentes})
 
 #pagina de crear o insertar INSERT
 def crearantecedentes(request, plantilla="crearantecedentes.html"):
@@ -353,12 +352,17 @@ def eliminarantecedentes(request, pk, plantilla="eliminarantecedentes.html"):
 
 
 #examenes
-def consultarexamen(request, plantilla="consultarexamen.html"):
+def consultarexamen(request):
+    buscar = request.GET.get("buscar")
     examen = Examen.objects.all()
-    data = {
-        'examen':examen
-    }
-    return render(request, plantilla, data)
+
+    if buscar:
+        examen = Examen.objects.filter(
+            Q(nombre_examen__icontains=buscar)
+
+        ).distinct()
+    return render(request, 'consultarexamen.html', {'examen':examen})
+
 #pagina de crear o insertar INSERT
 def crearexamen(request, plantilla="crearexamen.html"):
 
@@ -399,14 +403,20 @@ def eliminarexamen(request, pk, plantilla="eliminarexamen.html"):
 
 
 
-
 #consulta
-def consultarconsulta(request, plantilla="consultarconsulta.html"):
+def consultarconsulta(request):
+    buscar = request.GET.get("buscar")
     consulta = Consulta.objects.all()
-    data = {
-        'consulta':consulta
-    }
-    return render(request, plantilla, data)
+
+    if buscar:
+        consulta = Consulta.objects.filter(
+            Q(fecha_consulta__icontains=buscar) |
+            Q(motivoconsulta__icontains=buscar) |
+            Q(medico__icontains=buscar) |
+            Q(paciente__icontains=buscar)
+
+        ).distinct()
+    return render(request, 'consultarconsulta.html',{'consulta':consulta})
 
 #pagina de crear o insertar INSERT
 def crearconsulta(request, plantilla="crearconsulta.html"):
@@ -469,7 +479,6 @@ def crearexamenconsulta(request, plantilla="crearexamenconsulta.html"):
         form = Examen_consultaForm
 
     return render(request, plantilla, {'form': form})
-
 #pagina de modificar
 def modificarexamenconsulta(request, pk, plantilla="modificarexamenconsulta.html"):
     if request.method == "POST":
@@ -552,12 +561,22 @@ def eliminarhorariomedico(request, pk, plantilla="eliminarhorariomedico.html"):
 
 
 #reservaciones
-def consultarreservaciones(request, plantilla="consultarreservaciones.html"):
+def consultarreservaciones(request):
+    buscar = request.GET.get("buscar")
     reservaciones = Reservaciones.objects.all()
-    data = {
-        'reservaciones':reservaciones
-    }
-    return render(request, plantilla, data)
+
+    if buscar:
+        reservaciones = Reservaciones.objects.filter(
+            Q(fecha_ingreso__contains=buscar) |
+            Q(fecha_reservacion__contains=buscar) |
+            Q(estado_reservacion__contains=buscar) |
+            Q(horario__contains=buscar) |
+            Q(pacientes__contains=buscar) |
+            Q(medico__contains=buscar)
+
+        ).distinct()
+
+    return render(request, 'consultarreservaciones.html', {'reservaciones': reservaciones})
 
 
 #pagina de crear o insertar INSERT
