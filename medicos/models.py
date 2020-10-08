@@ -1,4 +1,7 @@
 from django.db import models
+from datetime import datetime
+
+from django.forms import model_to_dict
 
 # Create your models here.
 class Medicos(models.Model):
@@ -131,7 +134,7 @@ class Examen(models.Model):
 class Consulta(models.Model):
     fecha_consulta = models.DateField('Fecha que se realiza la consulta', blank=False, null=False)
     motivoconsulta = models.CharField('Motivo de la Consulta',max_length=200)
-    medico = models.ForeignKey(Medicos, on_delete=models.CASCADE)
+    medico = models.ForeignKey(Medicos, on_delete=models.CASCADE, related_query_name="medicos")
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
     #user = models.CharField(max_length=15)
     #usermod = models.CharField(max_length=15)

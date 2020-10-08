@@ -1,12 +1,15 @@
 {% extends "index.html" %}
 {% load static %}
+{% load widget_tweaks %}
 
 {% block headers %}
     <h2>Crear medico</h2>
     <form method="POST">
         {% csrf_token %}
             {{ form.as_p }}
-        <button type="submit" >Agregar Medico</button>
+        <button type="submit" class="btn btn-primary btn-flat">
+        <i class="fas fa-save"></i> Guardar registro
+        </button>
     </form>
 
 {% endblock %}

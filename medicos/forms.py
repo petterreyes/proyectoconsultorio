@@ -1,11 +1,50 @@
 from django import forms
 from .models import Medicos, Usuario, Paciente, Dia_atencion, Horario_atencion, Antecedente, Examen
 from .models import Consulta, Horario_medico,Reservaciones,Tratamiento, Examen_consulta
+from django.forms import ModelForm
+from datetime import datetime
+
 
 class MedicosForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['nombre'].widget.attrs['autofocus'] = True
+
     class Meta:
         model=Medicos
-        fields=['apellido','nombre','especialidad','edad','email','sexo']
+        fields = '__all__'
+        widgets = {
+            'nombre': forms.TextInput(
+                attrs={
+                    'placeholder': 'Ingrese un nombre',
+                }
+            ),
+            'apellido': forms.TextInput(
+                attrs={
+                    'placeholder': 'Ingrese un nombre',
+                }
+            ),
+            'especialidad': forms.TextInput(
+                attrs={
+                    'placeholder': 'Ingrese un nombre',
+                }
+            ),
+            'edad': forms.TextInput(
+                attrs={
+                    'placeholder': 'Ingrese un nombre',
+                }
+            ),
+            'email': forms.TextInput(
+                attrs={
+                    'placeholder': 'Ingrese un nombre',
+                }
+            ),
+            'sexo': forms.TextInput(
+                attrs={
+                    'placeholder': 'Ingrese un nombre',
+                }
+            ),
+        }
 
 class UsuarioForm(forms.ModelForm):
     class Meta:
