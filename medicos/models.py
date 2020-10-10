@@ -2,6 +2,7 @@ from django.db import models
 from datetime import datetime
 
 from django.forms import model_to_dict
+from medicos.choices import gender_choices
 
 # Create your models here.
 class Medicos(models.Model):
@@ -10,7 +11,7 @@ class Medicos(models.Model):
     especialidad = models.CharField(max_length=200)
     edad = models.IntegerField()
     email = models.EmailField()
-    sexo = models.CharField(max_length=21)
+    sexo = models.CharField(choices=gender_choices, default='male',max_length=21)
     estado = models.IntegerField(default=1) #1 si esta activo y 2 si esta eliminado
     #user = models.CharField(max_length=15)
     #usermod = models.CharField(max_length=15)
@@ -26,14 +27,13 @@ class Medicos(models.Model):
         return self.apellido + ' ' + self.nombre + ' ' + self.especialidad
 
 
-
 class Usuario(models.Model):
     nombre = models.CharField(blank=False, max_length=200)
     apellido = models.CharField(max_length=200)
     cedula = models.CharField(max_length=200)
     edad = models.IntegerField()
     email = models.EmailField()
-    sexo = models.CharField(max_length=1)
+    sexo = models.CharField(choices=gender_choices, default='male',max_length=21)
     tipousuario = models.CharField(max_length=200)
     estado = models.IntegerField(default=1)  # 1 si esta activo y 2 si esta eliminado
     #user = models.CharField(max_length=15)
@@ -56,7 +56,7 @@ class Paciente(models.Model):
     cedula = models.CharField(max_length=13)
     edad = models.IntegerField()
     email = models.EmailField()
-    sexo = models.CharField(max_length=1)
+    sexo = models.CharField(choices=gender_choices, default='male',max_length=21)
     estado_civil = models.CharField(max_length=20)
     telefono = models.CharField(max_length=10)
     #user = models.CharField(max_length=15)
