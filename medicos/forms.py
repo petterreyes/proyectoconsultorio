@@ -17,35 +17,42 @@ class MedicosForm(forms.ModelForm):
             'nombre': forms.TextInput(
                 attrs={
                     'placeholder': 'Ingrese un nombre',
+                    'class': 'form-control'
                 }
             ),
             'apellido': forms.TextInput(
                 attrs={
                     'placeholder': 'Ingrese un apellido',
+                    'class': 'form-control'
                 }
             ),
             'especialidad': forms.TextInput(
                 attrs={
                     'placeholder': 'Ingrese su especialidad',
+                    'class': 'form-control'
                 }
             ),
             'edad': forms.TextInput(
                 attrs={
                     'placeholder': 'Ingrese edad',
+                    'class': 'form-control'
                 }
             ),
             'email': forms.TextInput(
                 attrs={
                     'placeholder': 'Ingrese email',
+                    'class': 'form-control'
                 }
             ),
             'sexo': forms.Select()
         }
 
+
+
 class UsuarioForm(forms.ModelForm):
     class Meta:
-        model=Usuario
-        fields=['nombre','apellido','cedula','edad','email','sexo','tipousuario']
+        model = Usuario
+        fields = ['nombre', 'apellido','cedula','edad','email','sexo','tipousuario']
 
 class PacienteForm(forms.ModelForm):
     #class Meta:
