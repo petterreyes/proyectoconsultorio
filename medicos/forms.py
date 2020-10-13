@@ -17,36 +17,30 @@ class MedicosForm(forms.ModelForm):
             'nombre': forms.TextInput(
                 attrs={
                     'placeholder': 'Ingrese un nombre',
-                    'class': 'form-control'
                 }
             ),
             'apellido': forms.TextInput(
                 attrs={
                     'placeholder': 'Ingrese un apellido',
-                    'class': 'form-control'
                 }
             ),
             'especialidad': forms.TextInput(
                 attrs={
                     'placeholder': 'Ingrese su especialidad',
-                    'class': 'form-control'
                 }
             ),
             'edad': forms.TextInput(
                 attrs={
                     'placeholder': 'Ingrese edad',
-                    'class': 'form-control'
                 }
             ),
             'email': forms.TextInput(
                 attrs={
                     'placeholder': 'Ingrese email',
-                    'class': 'form-control'
                 }
             ),
             'sexo': forms.Select()
         }
-
 
 
 class UsuarioForm(forms.ModelForm):
@@ -69,49 +63,41 @@ class PacienteForm(forms.ModelForm):
             'nombre': forms.TextInput(
                 attrs={
                     'placeholder': 'Ingrese un nombre',
-                    'class': 'form-control'
                 }
             ),
             'apellido': forms.TextInput(
                 attrs={
                     'placeholder': 'Ingrese un nombre',
-                    'class': 'form-control'
                 }
             ),
             'fecha_nacimiento': forms.TextInput(
                 attrs={
                     'placeholder': 'Ingrese fecha',
-                    'class': 'form-control'
                 }
             ),
             'edad': forms.TextInput(
                 attrs={
-                    'placeholder': 'Ingrese edad',
-                    'class': 'form-control'
+                    'placeholder': 'Ingrese un nombre',
                 }
             ),
             'cedula': forms.TextInput(
                 attrs={
                     'placeholder': 'Ingrese cedula',
-                    'class': 'form-control'
                 }
             ),
             'email': forms.TextInput(
                 attrs={
                     'placeholder': 'Ingrese email',
-                    'class': 'form-control'
                 }
             ),
             'estado_civil': forms.TextInput(
                 attrs={
                     'placeholder': 'Ingrese estado civil',
-                    'class': 'form-control'
                 }
             ),
             'telefono': forms.TextInput(
                 attrs={
                     'placeholder': 'Ingrese numero de telefono',
-                    'class': 'form-control'
                 }
             ),
             'sexo': forms.Select()
@@ -131,7 +117,6 @@ class Dia_atencionForm(forms.ModelForm):
             'descripcion_dia': forms.TextInput(
                 attrs={
                     'placeholder': 'Ingrese dia',
-                    'class': 'form-control'
                 }
             ),
         }
@@ -151,13 +136,11 @@ class Horario_atencionForm(forms.ModelForm):
             'hora_inicio': forms.TextInput(
                 attrs={
                     'placeholder': 'Ingrese Hora de inicio',
-                    'class': 'form-control'
                 }
             ),
             'hora_fin': forms.TextInput(
                 attrs={
                     'placeholder': 'Ingrese Hora de fin',
-                    'class': 'form-control'
                 }
             ),
         }
@@ -176,7 +159,6 @@ class AntecedenteForm(forms.ModelForm):
             'descripcion': forms.TextInput(
                 attrs={
                     'placeholder': 'Ingrese la descipción',
-                    'class': 'form-control'
                 }
             ),
         }
@@ -195,7 +177,6 @@ class ExamenForm(forms.ModelForm):
             'nombre_examen': forms.TextInput(
                 attrs={
                     'placeholder': 'Ingrese la descipción del examen',
-                    'class': 'form-control'
                 }
             ),
         }
