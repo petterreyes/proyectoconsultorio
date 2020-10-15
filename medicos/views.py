@@ -1,10 +1,68 @@
+import io
+from io import BytesIO
+
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.styles import *
+from reportlab.lib.units import inch
+from reportlab.platypus import *
+from reportlab.lib.enums import TA_RIGHT, TA_CENTER
+
+
 from .forms import *
 from .models import *
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 
 # Create your views here.
+
+
+#pdf de medicos
+@login_required(None, "", 'login')
+def exportarListMedicos(request):
+    # Create a file-like buffer to receive PDF data.
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="lista_medicos.pdf"'
+
+    buffer = io.BytesIO()
+
+    doc = SimpleDocTemplate(buffer,
+                            rightMargin=inch / 4,
+                            leftMargin=inch / 4,
+                            topMargin=inch / 2,
+                            bottomMargin=inch / 4,
+                            pagesize=A4)
+    styles = getSampleStyleSheet()
+    styles.add(ParagraphStyle(name='centered', alignment=TA_CENTER))
+    styles.add(ParagraphStyle(name='RightAlign', fontName='Arial', align=TA_RIGHT))
+
+    medicos = []
+    styles = getSampleStyleSheet()
+    header = Paragraph("     Listado de medicos", styles['Heading1'])
+    medicos.append(header)
+    headings = ('Apellido', 'Nombres', 'Edad', 'Email', 'Sexo')
+    allmedicos = [(d.apellido, d.nombre, d.edad, d.email, d.sexo) for d in Medicos.objects.all()]
+    print
+    allmedicos
+
+    t = Table([headings] + allmedicos)
+    t.setStyle(TableStyle(
+        [
+            ('GRID', (0, 0), (9, -1), 1, colors.springgreen),
+            ('LINEBELOW', (0, 0), (-1, 0), 2, colors.springgreen),
+            ('BACKGROUND', (0, 0), (-1, 0), colors.springgreen)
+        ]
+    ))
+    medicos.append(t)
+    doc.build(medicos)
+    response.write(buffer.getvalue())
+    buffer.close()
+    return response
+
+
+
+
 #consulta de medicos
 @login_required(None, "", 'login')
 def medico(request):

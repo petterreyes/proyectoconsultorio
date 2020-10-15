@@ -7,6 +7,7 @@ urlpatterns = [
     path('crearmedicos/', views.crearmedicos, name="crearmedicos"),
     path('modificarmedicos/<int:pk>', views.modificarmedicos, name="modificarmedicos"),
     path('eliminarmedicos/<int:pk>', views.eliminarmedicos, name="eliminarmedicos"),
+    path('exportarListMedicos/', views.exportarListMedicos, name="exportarListMedicos"),
 
     #url de usuarios
     path('usuario/', views.consultarusuario, name="usuario"),
