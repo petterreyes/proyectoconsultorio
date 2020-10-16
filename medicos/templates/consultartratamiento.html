@@ -7,12 +7,15 @@
         <input class="form-control" type="text" placeholder="Buscar..." name="buscar" value="{{ request.GET.buscar }}">
         <button class="form-control" type="submit">Buscar Tratamiento</button>
     </form>
+        <tr>
+            <a class="nav-link"  href="{% url 'exportarListTratamiento' %}"> <i class="fas fa-file-pdf fa-5x"></i></a>
+        </tr>
 
         <tr>
             <th>Fecha de tratamiento</th>
             <th>Diagnostico</th>
             <th>Procedimiento</th>
-            <th>Consulta</th>
+            <th>Motivo de Consulta</th>
             <th>Medico</th>
             <th>Opciones</th>
         </tr>

@@ -20,6 +20,7 @@ urlpatterns = [
     path('crearpaciente/', views.crearpaciente, name="crearpaciente"),
     path('modificarpaciente/<int:pk>', views.modificarpaciente, name="modificarpaciente"),
     path('eliminarpaciente/<int:pk>', views.eliminarpaciente, name="eliminarpaciente"),
+    path('exportarListPaciente/', views.exportarListPaciente, name="exportarListPaciente"),
 
     #url de dia de atencion
     path('diadeatencion/', views.consultardiadeatencion, name="diadeatencion"),
@@ -56,6 +57,7 @@ urlpatterns = [
     path('crearexamenconsulta/', views.crearexamenconsulta, name="crearexamenconsulta"),
     path('modificarexamenconsulta/<int:pk>', views.modificarexamenconsulta, name="modificarexamenconsulta"),
     path('eliminarexamenconsulta/<int:pk>', views.eliminarexamenconsulta, name="eliminarexamenconsulta"),
+    path('exportarListConsultas/', views.exportarListConsultas, name="exportarListConsultas"),
 
     # url de horario del medico
     path('horariomedico/', views.consultarhorariomedico, name="horariomedico"),
@@ -68,10 +70,12 @@ urlpatterns = [
     path('crearreservaciones/', views.crearreservaciones, name="crearreservaciones"),
     path('modificarreservaciones/<int:pk>', views.modificarreservaciones, name="modificarreservaciones"),
     path('eliminarreservaciones/<int:pk>', views.eliminarreservaciones, name="eliminarreservaciones"),
+    path('exportarListReservaciones/', views.exportarListReservaciones, name="exportarListReservaciones"),
 
     # url de tratamiento
     path('tratamiento/', views.consultartratamiento, name="tratamiento"),
     path('creartratamiento/', views.creartratamiento, name="creartratamiento"),
     path('modificartratamiento/<int:pk>', views.modificartratamiento, name="modificartratamiento"),
     path('eliminartratamiento/<int:pk>', views.eliminartratamiento, name="eliminartratamiento"),
+    path('exportarListTratamiento/', views.exportarListTratamiento, name="exportarListTratamiento"),
 ]

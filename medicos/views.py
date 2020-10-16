@@ -61,8 +61,6 @@ def exportarListMedicos(request):
     return response
 
 
-
-
 #consulta de medicos
 @login_required(None, "", 'login')
 def medico(request):
@@ -175,6 +173,48 @@ def eliminarusuario(request, pk, plantilla="eliminarusuario.html"):
         form = UsuarioForm(request.POST or None, instance=usuario)
 
     return render(request, plantilla, {'form': form})
+
+#pdf de paciente
+@login_required(None, "", 'login')
+def exportarListPaciente(request):
+    # Create a file-like buffer to receive PDF data.
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="lista_Pacientes.pdf"'
+
+    buffer = io.BytesIO()
+
+    doc = SimpleDocTemplate(buffer,
+                            rightMargin=inch / 4,
+                            leftMargin=inch / 4,
+                            topMargin=inch / 2,
+                            bottomMargin=inch / 4,
+                            pagesize=A4)
+    styles = getSampleStyleSheet()
+    styles.add(ParagraphStyle(name='centered', alignment=TA_CENTER))
+    styles.add(ParagraphStyle(name='RightAlign', fontName='Arial', align=TA_RIGHT))
+
+    consultarpaciente = []
+    styles = getSampleStyleSheet()
+    header = Paragraph("     Listado de Pacientes ", styles['Heading1'])
+    consultarpaciente.append(header)
+    headings = ('Cedula','Apellido', 'Nombres', 'Edad', 'Email', 'Sexo')
+    allpaciente = [(d.cedula,d.apellido, d.nombre, d.edad, d.email, d.sexo) for d in Paciente.objects.all()]
+    print
+    allpaciente
+
+    t = Table([headings] + allpaciente)
+    t.setStyle(TableStyle(
+        [
+            ('GRID', (0, 0), (9, -1), 1, colors.springgreen),
+            ('LINEBELOW', (0, 0), (-1, 0), 2, colors.springgreen),
+            ('BACKGROUND', (0, 0), (-1, 0), colors.springgreen)
+        ]
+    ))
+    consultarpaciente.append(t)
+    doc.build(consultarpaciente)
+    response.write(buffer.getvalue())
+    buffer.close()
+    return response
 
 #paciente
 def consultarpaciente(request):
@@ -452,6 +492,48 @@ def eliminarexamen(request, pk, plantilla="eliminarexamen.html"):
 
 
 
+#pdf de tratamiento
+@login_required(None, "", 'login')
+def exportarListConsultas(request):
+    # Create a file-like buffer to receive PDF data.
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="lista_Consulta.pdf"'
+
+    buffer = io.BytesIO()
+
+    doc = SimpleDocTemplate(buffer,
+                            rightMargin=inch / 4,
+                            leftMargin=inch / 4,
+                            topMargin=inch / 2,
+                            bottomMargin=inch / 4,
+                            pagesize=A4)
+    styles = getSampleStyleSheet()
+    styles.add(ParagraphStyle(name='centered', alignment=TA_CENTER))
+    styles.add(ParagraphStyle(name='RightAlign', fontName='Arial', align=TA_RIGHT))
+
+    consultarconsulta = []
+    styles = getSampleStyleSheet()
+    header = Paragraph("     Listado de Tratamiento", styles['Heading1'])
+    consultarconsulta.append(header)
+    headings = ('Fecha de consulta','Motivo de la consulta','Medico', 'Paciente')
+    allconsulta= [(d.fecha_consulta,d.motivoconsulta, d.medico, d.paciente) for d in Consulta.objects.all()]
+    print
+    allconsulta
+
+    t = Table([headings] + allconsulta)
+    t.setStyle(TableStyle(
+        [
+            ('GRID', (0, 0), (9, -1), 1, colors.springgreen),
+            ('LINEBELOW', (0, 0), (-1, 0), 2, colors.springgreen),
+            ('BACKGROUND', (0, 0), (-1, 0), colors.springgreen)
+        ]
+    ))
+    consultarconsulta.append(t)
+    doc.build(consultarconsulta)
+    response.write(buffer.getvalue())
+    buffer.close()
+    return response
+
 #consulta
 def consultarconsulta(request):
     buscar = request.GET.get("buscar")
@@ -506,7 +588,6 @@ def eliminarconsulta(request, pk, plantilla="eliminarconsulta.html"):
 
     return render(request, plantilla, {'form': form})
 
-
 #examen de consulta
 def consultarexamenconsulta(request, plantilla="consultarexamenconsulta.html"):
     examenconsulta = Examen_consulta.objects.all()
@@ -558,6 +639,9 @@ def eliminarexamenconsulta(request, pk, plantilla="eliminarexamenconsulta.html")
 
     return render(request, plantilla, {'form': form})
 
+
+
+
 #horario del medico
 def consultarhorariomedico(request, plantilla="consultarhorariomedico.html"):
     horariomedico = Horario_medico.objects.all()
@@ -565,7 +649,6 @@ def consultarhorariomedico(request, plantilla="consultarhorariomedico.html"):
         'horariomedico':horariomedico
     }
     return render(request, plantilla, data)
-
 
 #pagina de crear o insertar INSERT
 def crearhorariomedico(request, plantilla="crearhorariomedico.html"):
@@ -595,6 +678,7 @@ def modificarhorariomedico(request, pk, plantilla="modificarhorariomedico.html")
 
 
     return render(request, plantilla, {'form': form})
+
 #pagina de eliminar
 def eliminarhorariomedico(request, pk, plantilla="eliminarhorariomedico.html"):
     if request.method == "POST":
@@ -608,6 +692,47 @@ def eliminarhorariomedico(request, pk, plantilla="eliminarhorariomedico.html"):
         form = Horario_medicoForm(request.POST or None, instance=horariomedico)
     return render(request, plantilla, {'form': form})
 
+#pdf de reservaciones
+@login_required(None, "", 'login')
+def exportarListReservaciones(request):
+    # Create a file-like buffer to receive PDF data.
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="lista_Reservaciones.pdf"'
+
+    buffer = io.BytesIO()
+
+    doc = SimpleDocTemplate(buffer,
+                            rightMargin=inch / 4,
+                            leftMargin=inch / 4,
+                            topMargin=inch / 2,
+                            bottomMargin=inch / 4,
+                            pagesize=A4)
+    styles = getSampleStyleSheet()
+    styles.add(ParagraphStyle(name='centered', alignment=TA_CENTER))
+    styles.add(ParagraphStyle(name='RightAlign', fontName='Arial', align=TA_RIGHT))
+
+    consultarreservaciones = []
+    styles = getSampleStyleSheet()
+    header = Paragraph("     Listado de Reservaciones ", styles['Heading1'])
+    consultarreservaciones.append(header)
+    headings = ('Fecha de Ingreso','Fecha de Reservacion','Medico', 'Paciente', 'Horario')
+    allreservaciones = [(d.fecha_ingreso,d.fecha_reservacion, d.medico, d.pacientes, d.horario) for d in Reservaciones.objects.all()]
+    print
+    allreservaciones
+
+    t = Table([headings] + allreservaciones)
+    t.setStyle(TableStyle(
+        [
+            ('GRID', (0, 0), (9, -1), 1, colors.springgreen),
+            ('LINEBELOW', (0, 0), (-1, 0), 2, colors.springgreen),
+            ('BACKGROUND', (0, 0), (-1, 0), colors.springgreen)
+        ]
+    ))
+    consultarreservaciones.append(t)
+    doc.build(consultarreservaciones)
+    response.write(buffer.getvalue())
+    buffer.close()
+    return response
 
 #reservaciones
 def consultarreservaciones(request):
@@ -626,7 +751,6 @@ def consultarreservaciones(request):
         ).distinct()
 
     return render(request, 'consultarreservaciones.html', {'reservaciones': reservaciones})
-
 
 #pagina de crear o insertar INSERT
 def crearreservaciones(request, plantilla="crearreservaciones.html"):
@@ -656,6 +780,7 @@ def modificarreservaciones(request, pk, plantilla="modificarreservaciones.html")
 
 
     return render(request, plantilla, {'form': form})
+
 #pagina de eliminar
 def eliminarreservaciones(request, pk, plantilla="eliminarreservaciones.html"):
 
@@ -672,6 +797,47 @@ def eliminarreservaciones(request, pk, plantilla="eliminarreservaciones.html"):
     return render(request, plantilla, {'form': form})
 
 
+#pdf de tratamiento
+@login_required(None, "", 'login')
+def exportarListTratamiento(request):
+    # Create a file-like buffer to receive PDF data.
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="lista_Tratamiento.pdf"'
+
+    buffer = io.BytesIO()
+
+    doc = SimpleDocTemplate(buffer,
+                            rightMargin=inch / 4,
+                            leftMargin=inch / 4,
+                            topMargin=inch / 2,
+                            bottomMargin=inch / 4,
+                            pagesize=A4)
+    styles = getSampleStyleSheet()
+    styles.add(ParagraphStyle(name='centered', alignment=TA_CENTER))
+    styles.add(ParagraphStyle(name='RightAlign', fontName='Arial', align=TA_RIGHT))
+
+    consultartratamiento = []
+    styles = getSampleStyleSheet()
+    header = Paragraph("     Listado de Tratamiento", styles['Heading1'])
+    consultartratamiento.append(header)
+    headings = ('Fecha de tratamiento','Diagnostico','Medico', 'Procedimiento', 'Consulta')
+    alltratamiento = [(d.fecha_tratamiento,d.diagnostico, d.medico, d.procedimiento, d.consulta) for d in Tratamiento.objects.all()]
+    print
+    alltratamiento
+
+    t = Table([headings] + alltratamiento)
+    t.setStyle(TableStyle(
+        [
+            ('GRID', (0, 0), (9, -1), 1, colors.springgreen),
+            ('LINEBELOW', (0, 0), (-1, 0), 2, colors.springgreen),
+            ('BACKGROUND', (0, 0), (-1, 0), colors.springgreen)
+        ]
+    ))
+    consultartratamiento.append(t)
+    doc.build(consultartratamiento)
+    response.write(buffer.getvalue())
+    buffer.close()
+    return response
 
 #examen de consulta
 def consultartratamiento(request, plantilla="consultartratamiento.html"):
@@ -680,7 +846,6 @@ def consultartratamiento(request, plantilla="consultartratamiento.html"):
         'tratamiento':tratamiento
     }
     return render(request, plantilla, data)
-
 
 #pagina de crear o insertar INSERT
 def creartratamiento(request, plantilla="creartratamiento.html"):
@@ -710,6 +875,7 @@ def modificartratamiento(request, pk, plantilla="modificartratamiento.html"):
 
 
     return render(request, plantilla, {'form': form})
+
 #pagina de eliminar
 def eliminartratamiento(request, pk, plantilla="eliminartratamiento.html"):
 

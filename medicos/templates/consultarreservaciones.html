@@ -7,30 +7,33 @@
         <input class="form-control" type="text" placeholder="Buscar..." name="buscar" value="{{ request.GET.buscar }}">
         <button class="form-control" type="submit">Buscar Reservaciones</button>
     </form>
+        <tr>
+            <a class="nav-link"  href="{% url 'exportarListReservaciones' %}"> <i class="fas fa-file-pdf fa-5x"></i></a>
+        </tr>
 
-                    <tr>
-                        <th>Fecha de reservacion</th>
-                        <th>Fecha de ingreso</th>
-                        <th>Estado de reservacion</th>
-                        <th>Horario</th>
-                        <th>Pacientes</th>
-                        <th>Medico</th>
-                        <th>Opciones</th>
-                   </tr>
+        <tr>
+           <th>Fecha de reservacion</th>
+           <th>Fecha de ingreso</th>
+           <th>Estado de reservacion</th>
+           <th>Horario</th>
+           <th>Pacientes</th>
+           <th>Medico</th>
+           <th>Opciones</th>
+        </tr>
 
-                    {% for p in reservaciones %}
+        {% for p in reservaciones %}
 
-                    <tr>
-                            <td>{{ p.fecha_reservacion }}</td>
-                            <td>{{ p.fecha_ingreso }}</td>
-                            <td>{{ p.estado_reservacion }}</td>
-                            <td>{{ p.horario }}</td>
-                            <td>{{ p.pacientes }}</td>
-                            <td>{{ p.medico }}</td>
-                            <td><a class="nav-link" href="{% url 'modificarreservaciones' p.id %}">Modificar</a></td>
-                            <td><a class="nav-link" href="{% url 'eliminarreservaciones' p.id %}">Eliminar</a></td>
-                    </tr>
-                   {% endfor %}
+        <tr>
+           <td>{{ p.fecha_reservacion }}</td>
+           <td>{{ p.fecha_ingreso }}</td>
+           <td>{{ p.estado_reservacion }}</td>
+           <td>{{ p.horario }}</td>
+           <td>{{ p.pacientes }}</td>
+           <td>{{ p.medico }}</td>
+           <td><a class="nav-link" href="{% url 'modificarreservaciones' p.id %}">Modificar</a></td>
+           <td><a class="nav-link" href="{% url 'eliminarreservaciones' p.id %}">Eliminar</a></td>
+        </tr>
+      {% endfor %}
     </table>
 
     <a class="nav-link" href="{% url 'crearreservaciones' %}">Crear reservaciones</a>
