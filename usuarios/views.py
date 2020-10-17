@@ -69,6 +69,7 @@ def consultarusuarios(request):
             Q(email__icontains=buscar) |
             Q(date_of_birth__icontains=buscar)
 
+
         ).distinct()
     return render(request, 'consultarusuarios.html', {'usuarios':usuario})
 
@@ -103,9 +104,9 @@ def exportarListUsuarios(request):
     t = Table([headings] + allusuarios)
     t.setStyle(TableStyle(
         [
-            ('GRID', (0, 0), (9, -1), 1, colors.springgreen),
-            ('LINEBELOW', (0, 0), (-1, 0), 2, colors.springgreen),
-            ('BACKGROUND', (0, 0), (-1, 0), colors.springgreen)
+            ('GRID', (0, 0), (9, -1), 1, colors.yellowgreen),
+            ('LINEBELOW', (0, 0), (-1, 0), 2, colors.yellowgreen),
+            ('BACKGROUND', (0, 0), (-1, 0), colors.yellowgreen)
         ]
     ))
     usuarios.append(t)
@@ -156,9 +157,9 @@ def exportarListRol(request):
     t = Table([headings] + allroles)
     t.setStyle(TableStyle(
         [
-            ('GRID', (0, 0), (9, -1), 1, colors.springgreen),
-            ('LINEBELOW', (0, 0), (-1, 0), 2, colors.springgreen),
-            ('BACKGROUND', (0, 0), (-1, 0), colors.springgreen)
+            ('GRID', (0, 0), (9, -1), 1, colors.thistle),
+            ('LINEBELOW', (0, 0), (-1, 0), 2, colors.thistle),
+            ('BACKGROUND', (0, 0), (-1, 0), colors.thistle)
         ]
     ))
     roles.append(t)
@@ -203,9 +204,9 @@ def exportarListRolUsuario(request):
     t = Table([headings] + allroles)
     t.setStyle(TableStyle(
         [
-            ('GRID', (0, 0), (9, -1), 1, colors.springgreen),
-            ('LINEBELOW', (0, 0), (-1, 0), 2, colors.springgreen),
-            ('BACKGROUND', (0, 0), (-1, 0), colors.springgreen)
+            ('GRID', (0, 0), (9, -1), 1, colors.steelblue),
+            ('LINEBELOW', (0, 0), (-1, 0), 2, colors.steelblue),
+            ('BACKGROUND', (0, 0), (-1, 0), colors.steelblue)
         ]
     ))
     rolUsuario.append(t)

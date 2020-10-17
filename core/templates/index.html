@@ -87,7 +87,7 @@
             </ul>
         </nav><!-- .nav-menu -->
               {% if request.user.is_authenticated %}
-                    <a class="nav-link" href="{% url 'doctores' %}"></a>
+                    <a class="nav-link" href="{% url 'doctores' %}">Doctores</a>
                     {% if user.rolusuario.rol.nombre == "ADMINISTRADOR" or user.rolusuario.rol == "" %}
                         <a class="nav-link" href="{% url 'medicos' %}"></a>
                         <a class="nav-link" href="{% url 'consultar_usuarios' %}">Usuarios</a>

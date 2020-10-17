@@ -47,6 +47,9 @@ class Rol(models.Model):
     def __str__(self):
         return '{}'.format(self.nombre)
 
+    #class Meta:
+        #ordering = ['nombre']
+
 
 class User(AbstractBaseUser):
     username = models.CharField(('username'), max_length=200, unique=True, blank=False, validators=[
@@ -74,8 +77,11 @@ class User(AbstractBaseUser):
     def __str__(self):
         return '{}'.format(self.username)
 
+    #class Meta:
+        #ordering = ['username']
 
-    def get_absolute_url(self):
+
+    def get_absolute_url (self) :
         return reverse('modificar_usuario', kwargs={'pk': self.pk})
 
     def has_perm(self, perm, obj=None):
@@ -97,6 +103,9 @@ class User(AbstractBaseUser):
 class RolUsuario(models.Model):
     rol = models.OneToOneField(Rol, on_delete=models.CASCADE)
     usuario = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    #class Meta:
+        #ordering = ['-rol']
 
 
 
