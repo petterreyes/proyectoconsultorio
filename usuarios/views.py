@@ -1,11 +1,23 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as do_login
 from django.contrib.auth import logout as do_logout
+from django.contrib.auth.decorators import login_required
+
 
 from .forms import UserCreationForm, RolForm, RolUsuarioForm
+from django.db.models import Q
+
+import io
+from io import BytesIO
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import A4, A5, A2, A3
+from reportlab.lib.styles import *
+from reportlab.lib.units import inch
+from reportlab.platypus import *
+from reportlab.lib.enums import TA_RIGHT, TA_CENTER
 
 
 # Create your views here.
@@ -46,9 +58,61 @@ def logout(request):
     # Redireccionamos a la portada
     return redirect("login")
 
-def consultarusuarios(request, plantilla="consultarusuarios.html"):
-    usuarios = User.objects.all
-    return render(request, plantilla, {'usuarios':usuarios})
+
+def consultarusuarios(request):
+    buscar = request.GET.get("buscar")
+    usuario = User.objects.all()
+
+    if buscar:
+        usuario = User.objects.filter(
+            Q(username__icontains=buscar) |
+            Q(email__icontains=buscar) |
+            Q(date_of_birth__icontains=buscar)
+
+        ).distinct()
+    return render(request, 'consultarusuarios.html', {'usuarios':usuario})
+
+#pdf de medicos
+@login_required(None, "", 'login')
+def exportarListUsuarios(request):
+    # Create a file-like buffer to receive PDF data.
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="lista_usuarios.pdf"'
+
+    buffer = io.BytesIO()
+
+    doc = SimpleDocTemplate(buffer,
+                            rightMargin=inch / 4,
+                            leftMargin=inch / 4,
+                            topMargin=inch / 2,
+                            bottomMargin=inch / 4,
+                            pagesize=A4)
+    styles = getSampleStyleSheet()
+    styles.add(ParagraphStyle(name='centered', alignment=TA_CENTER))
+    styles.add(ParagraphStyle(name='RightAlign', fontName='Arial', align=TA_RIGHT))
+
+    usuarios = []
+    styles = getSampleStyleSheet()
+    header = Paragraph("     Listado de usuarios", styles['Heading1'])
+    usuarios.append(header)
+    headings = ('Usuario', 'Correo', 'Fecha de nacimiento')
+    allusuarios = [(d.username, d.email, d.date_of_birth) for d in User.objects.all()]
+    print
+    allusuarios
+
+    t = Table([headings] + allusuarios)
+    t.setStyle(TableStyle(
+        [
+            ('GRID', (0, 0), (9, -1), 1, colors.springgreen),
+            ('LINEBELOW', (0, 0), (-1, 0), 2, colors.springgreen),
+            ('BACKGROUND', (0, 0), (-1, 0), colors.springgreen)
+        ]
+    ))
+    usuarios.append(t)
+    doc.build(usuarios)
+    response.write(buffer.getvalue())
+    buffer.close()
+    return response
 
 def consultarroles(request, plantilla="consultarroles.html"):
     roles = Rol.objects.all
