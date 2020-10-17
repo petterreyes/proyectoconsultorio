@@ -302,8 +302,8 @@ def exportarListDiadeAtencion(request):
     styles = getSampleStyleSheet()
     header = Paragraph("     Listado de dias", styles['Heading1'])
     consultardiadeatencion.append(header)
-    headings = ('Dias de atencion')
-    alldiadeatencion = [(d.descripcion_dia) for d in Dia_atencion.objects.all()]
+    headings = ('Id','Dias de atencion')
+    alldiadeatencion = [(d.id, d.descripcion_dia) for d in Dia_atencion.objects.all()]
     print
     alldiadeatencion
 
@@ -498,8 +498,8 @@ def exportarListAntecedentes(request):
     styles = getSampleStyleSheet()
     header = Paragraph("     Listado de antecedentes ", styles['Heading1'])
     consultarantecedentes.append(header)
-    headings = ('Descripcion')
-    allantecedente = [(d.descripcion) for d in Antecedente.objects.all()]
+    headings = ('Id','Descripcion')
+    allantecedente = [(d.id, d.descripcion) for d in Antecedente.objects.all()]
     print
     allantecedente
 
@@ -592,8 +592,8 @@ def exportarListExamen(request):
     styles = getSampleStyleSheet()
     header = Paragraph("     Listado de examenes ", styles['Heading1'])
     consultarexamen.append(header)
-    headings = ('Examenes')
-    allexamen = [(d.nombre_examen) for d in Examen.objects.all()]
+    headings = ('Id', 'Examenes')
+    allexamen = [(d.id, d.nombre_examen) for d in Examen.objects.all()]
     print
     allexamen
 
