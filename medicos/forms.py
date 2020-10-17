@@ -70,11 +70,9 @@ class PacienteForm(forms.ModelForm):
                     'placeholder': 'Ingrese un nombre',
                 }
             ),
-            'fecha_nacimiento': forms.TextInput(
-                attrs={
-                    'placeholder': 'Ingrese fecha',
-                }
-            ),
+            'fecha_nacimiento': forms.DateInput(format=('%m/%d/%Y'),
+                                             attrs={'class': 'form-control', 'placeholder': 'Select a date',
+                                                    'type': 'date', 'size':30}),
             'edad': forms.TextInput(
                 attrs={
                     'placeholder': 'Ingrese un nombre',
