@@ -62,6 +62,7 @@ urlpatterns = [
     path('crearexamenconsulta/', views.crearexamenconsulta, name="crearexamenconsulta"),
     path('modificarexamenconsulta/<int:pk>', views.modificarexamenconsulta, name="modificarexamenconsulta"),
     path('eliminarexamenconsulta/<int:pk>', views.eliminarexamenconsulta, name="eliminarexamenconsulta"),
+    path('exportarListExamenConsulta/', views.exportarListExamenConsulta, name="exportarListExamenConsulta"),
 
     # url de horario del medico
     path('horariomedico/', views.consultarhorariomedico, name="horariomedico"),

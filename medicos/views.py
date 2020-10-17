@@ -760,6 +760,49 @@ def eliminarconsulta(request, pk, plantilla="eliminarconsulta.html"):
 
     return render(request, plantilla, {'form': form})
 
+
+#pdf de examen
+@login_required(None, "", 'login')
+def exportarListExamenConsulta(request):
+    # Create a file-like buffer to receive PDF data.
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="lista_examen.pdf"'
+
+    buffer = io.BytesIO()
+
+    doc = SimpleDocTemplate(buffer,
+                            rightMargin=inch / 4,
+                            leftMargin=inch / 4,
+                            topMargin=inch / 2,
+                            bottomMargin=inch / 4,
+                            pagesize=A3)
+    styles = getSampleStyleSheet()
+    styles.add(ParagraphStyle(name='centered', alignment=TA_CENTER))
+    styles.add(ParagraphStyle(name='RightAlign', fontName='Arial', align=TA_RIGHT))
+
+    consultarexamen = []
+    styles = getSampleStyleSheet()
+    header = Paragraph("     Listado de examenes ", styles['Heading1'])
+    consultarexamen.append(header)
+    headings = ('Descripcion', 'Consulta', 'Examen')
+    allexamen = [(d.descripcion, d.consulta, d.examen) for d in Examen_consulta.objects.all()]
+    print
+    allexamen
+
+    t = Table([headings] + allexamen)
+    t.setStyle(TableStyle(
+        [
+            ('GRID', (0, 0), (9, -1), 1, colors.springgreen),
+            ('LINEBELOW', (0, 0), (-1, 0), 2, colors.springgreen),
+            ('BACKGROUND', (0, 0), (-1, 0), colors.springgreen)
+        ]
+    ))
+    consultarexamen.append(t)
+    doc.build(consultarexamen)
+    response.write(buffer.getvalue())
+    buffer.close()
+    return response
+
 #examen de consulta
 def consultarexamenconsulta(request, plantilla="consultarexamenconsulta.html"):
     examenconsulta = Examen_consulta.objects.all()
