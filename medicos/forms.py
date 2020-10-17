@@ -42,7 +42,6 @@ class MedicosForm(forms.ModelForm):
             'sexo': forms.Select()
         }
 
-
 class UsuarioForm(forms.ModelForm):
     class Meta:
         model = Usuario
@@ -184,6 +183,10 @@ class ConsultaForm(forms.ModelForm):
     class Meta:
         model=Consulta
         fields=['fecha_consulta','motivoconsulta','medico','paciente']
+        widgets = {'fecha_consulta':forms.DateInput(format=('%m/%d/%Y'),
+                                             attrs={'placeholder': 'Select a date',
+                                                    'type': 'date', 'size':25}),
+                   }
 
 class Examen_consultaForm(forms.ModelForm):
     class Meta:
@@ -195,14 +198,23 @@ class Horario_medicoForm(forms.ModelForm):
         model=Horario_medico
         fields=['medico','dia_atencion','horario_atencion']
 
-
 class ReservacionesForm(forms.ModelForm):
     class Meta:
         model=Reservaciones
         fields=['fecha_reservacion','fecha_ingreso','estado_reservacion','horario','pacientes','medico']
-
+        widgets = {'fecha_reservacion': forms.DateInput(format=('%m/%d/%Y'),
+                                                     attrs={'placeholder': 'Select a date',
+                                                            'type': 'date', 'size': 25}),
+                   'fecha_ingreso': forms.DateInput(format=('%m/%d/%Y'),
+                                                        attrs={'placeholder': 'Select a date',
+                                                               'type': 'date', 'size': 25}),
+                   }
 
 class TratamientoForm(forms.ModelForm):
     class Meta:
         model=Tratamiento
         fields=['fecha_tratamiento','diagnostico','procedimiento','consulta','medico']
+        widgets = {'fecha_tratamiento': forms.DateInput(format=('%m/%d/%Y'),
+                                                        attrs={'placeholder': 'Select a date',
+                                                               'type': 'date', 'size': 25}),
+                   }
