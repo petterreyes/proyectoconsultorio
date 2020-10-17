@@ -3,10 +3,7 @@
 
 {% block headers %}
 <table class="table table-striped table-sm table-hover table-bordered">
-    <form class="form-control" method="GET" action="{% url 'examenconsulta' %}">
-        <input class="form-control" type="text" placeholder="Buscar..." name="buscar" value="{{ request.GET.buscar }}">
-        <button class="form-control" type="submit">Buscar Examen Consulta</button>
-    </form>
+
         <tr>
             <a class="nav-link"  href="{% url 'exportarListExamenConsulta' %}"> <i class="fas fa-file-pdf fa-5x"></i></a>
         </tr>
