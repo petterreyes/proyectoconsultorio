@@ -172,6 +172,48 @@ def consultarrolesusuarios(request, plantilla="consultarrolesusuarios.html"):
     rolesusuarios = RolUsuario.objects.all
     return render(request, plantilla, {'rolesusuarios':rolesusuarios})
 
+#pdf de roles y usuarios
+@login_required(None, "", 'login')
+def exportarListRolUsuario(request):
+    # Create a file-like buffer to receive PDF data.
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="lista_roles_usuarios.pdf"'
+
+    buffer = io.BytesIO()
+
+    doc = SimpleDocTemplate(buffer,
+                            rightMargin=inch / 4,
+                            leftMargin=inch / 4,
+                            topMargin=inch / 2,
+                            bottomMargin=inch / 4,
+                            pagesize=A4)
+    styles = getSampleStyleSheet()
+    styles.add(ParagraphStyle(name='centered', alignment=TA_CENTER))
+    styles.add(ParagraphStyle(name='RightAlign', fontName='Arial', align=TA_RIGHT))
+
+    rolUsuario = []
+    styles = getSampleStyleSheet()
+    header = Paragraph("     Listado de roles y usuarios", styles['Heading1'])
+    rolUsuario.append(header)
+    headings = ('Rol','Usuario')
+    allroles = [(d.rol, d.usuario) for d in RolUsuario.objects.all()]
+    print
+    allroles
+
+    t = Table([headings] + allroles)
+    t.setStyle(TableStyle(
+        [
+            ('GRID', (0, 0), (9, -1), 1, colors.springgreen),
+            ('LINEBELOW', (0, 0), (-1, 0), 2, colors.springgreen),
+            ('BACKGROUND', (0, 0), (-1, 0), colors.springgreen)
+        ]
+    ))
+    rolUsuario.append(t)
+    doc.build(rolUsuario)
+    response.write(buffer.getvalue())
+    buffer.close()
+    return response
+
 def crearusuario(request, plantilla="crearusuarios.html"):
     if request.method=="POST":
         form = UserCreationForm(request.POST or None)

@@ -28,6 +28,6 @@ urlpatterns = [
     path('crear_rol_usuario/', views.crearrolusuario, name="crear_rol_usuario"),
     path('modificar_rol_usuario/<int:pk>', views.modificarrolusuario, name="modificar_rol_usuario"),
     path('eliminar_rol_usuario/<int:pk>', views.eliminarrolusuario, name="eliminar_rol_usuario"),
-    path('consultar_roles_usuarios/', views.consultarrolesusuarios, name="consultar_roles_usuarios"),
+    path('exportarListRolUsuario/', views.exportarListRolUsuario, name="exportarListRolUsuario"),
 
 ]
