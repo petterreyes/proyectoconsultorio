@@ -72,7 +72,7 @@ def consultarusuarios(request):
         ).distinct()
     return render(request, 'consultarusuarios.html', {'usuarios':usuario})
 
-#pdf de medicos
+#pdf de usuarios
 @login_required(None, "", 'login')
 def exportarListUsuarios(request):
     # Create a file-like buffer to receive PDF data.
@@ -114,9 +114,59 @@ def exportarListUsuarios(request):
     buffer.close()
     return response
 
-def consultarroles(request, plantilla="consultarroles.html"):
-    roles = Rol.objects.all
-    return render(request, plantilla, {'roles':roles})
+def consultarroles(request):
+    buscar = request.GET.get("buscar")
+    roles = Rol.objects.all()
+
+    if buscar:
+        roles = Rol.objects.filter(
+            Q(nombre__icontains=buscar)
+
+        ).distinct()
+    return render(request, 'consultarroles.html', {'roles':roles})
+
+#pdf de roles
+@login_required(None, "", 'login')
+def exportarListRol(request):
+    # Create a file-like buffer to receive PDF data.
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="lista_roles.pdf"'
+
+    buffer = io.BytesIO()
+
+    doc = SimpleDocTemplate(buffer,
+                            rightMargin=inch / 4,
+                            leftMargin=inch / 4,
+                            topMargin=inch / 2,
+                            bottomMargin=inch / 4,
+                            pagesize=A4)
+    styles = getSampleStyleSheet()
+    styles.add(ParagraphStyle(name='centered', alignment=TA_CENTER))
+    styles.add(ParagraphStyle(name='RightAlign', fontName='Arial', align=TA_RIGHT))
+
+    roles = []
+    styles = getSampleStyleSheet()
+    header = Paragraph("     Listado de roles", styles['Heading1'])
+    roles.append(header)
+    headings = ('Id','Rol')
+    allroles = [(d.id, d.nombre) for d in Rol.objects.all()]
+    print
+    allroles
+
+    t = Table([headings] + allroles)
+    t.setStyle(TableStyle(
+        [
+            ('GRID', (0, 0), (9, -1), 1, colors.springgreen),
+            ('LINEBELOW', (0, 0), (-1, 0), 2, colors.springgreen),
+            ('BACKGROUND', (0, 0), (-1, 0), colors.springgreen)
+        ]
+    ))
+    roles.append(t)
+    doc.build(roles)
+    response.write(buffer.getvalue())
+    buffer.close()
+    return response
+
 
 def consultarrolesusuarios(request, plantilla="consultarrolesusuarios.html"):
     rolesusuarios = RolUsuario.objects.all
