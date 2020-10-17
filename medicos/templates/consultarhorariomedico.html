@@ -7,7 +7,9 @@
         <input class="form-control" type="text" placeholder="Buscar..." name="buscar" value="{{ request.GET.buscar }}">
         <button class="form-control" type="submit">Buscar horario de medico</button>
     </form>
-
+        <tr>
+            <a class="nav-link"  href="{% url 'exportarListHorarioMedico' %}"> <i class="fas fa-file-pdf fa-5x"></i></a>
+        </tr>
         <tr>
             <th>Medico</th>
             <th>Dia de atencion</th>

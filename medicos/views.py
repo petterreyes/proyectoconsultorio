@@ -3,7 +3,7 @@ from io import BytesIO
 
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from reportlab.lib import colors
-from reportlab.lib.pagesizes import A4
+from reportlab.lib.pagesizes import A4, A5, A2, A3
 from reportlab.lib.styles import *
 from reportlab.lib.units import inch
 from reportlab.platypus import *
@@ -188,7 +188,7 @@ def exportarListPaciente(request):
                             leftMargin=inch / 4,
                             topMargin=inch / 2,
                             bottomMargin=inch / 4,
-                            pagesize=A4)
+                            pagesize=A3)
     styles = getSampleStyleSheet()
     styles.add(ParagraphStyle(name='centered', alignment=TA_CENTER))
     styles.add(ParagraphStyle(name='RightAlign', fontName='Arial', align=TA_RIGHT))
@@ -197,8 +197,8 @@ def exportarListPaciente(request):
     styles = getSampleStyleSheet()
     header = Paragraph("     Listado de Pacientes ", styles['Heading1'])
     consultarpaciente.append(header)
-    headings = ('Cedula','Apellido', 'Nombres', 'Edad', 'Email', 'Sexo')
-    allpaciente = [(d.cedula,d.apellido, d.nombre, d.edad, d.email, d.sexo) for d in Paciente.objects.all()]
+    headings = ('Nombres', 'Apellido', 'Fecha de nacimiento', 'Cedula', 'Edad', 'Email', 'Sexo','Estado Civil', 'Telefono')
+    allpaciente = [(d.nombre,d.apellido, d.fecha_nacimiento, d.cedula, d.edad, d.email, d.sexo, d.estado_civil, d.telefono) for d in Paciente.objects.all()]
     print
     allpaciente
 
@@ -278,6 +278,49 @@ def eliminarpaciente(request, pk, plantilla="eliminarpaciente.html"):
 
     return render(request, plantilla, {'form': form})
 
+
+#pdf de dia de atencion
+@login_required(None, "", 'login')
+def exportarListDiadeAtencion(request):
+    # Create a file-like buffer to receive PDF data.
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="lista_diaatencion.pdf"'
+
+    buffer = io.BytesIO()
+
+    doc = SimpleDocTemplate(buffer,
+                            rightMargin=inch / 4,
+                            leftMargin=inch / 4,
+                            topMargin=inch / 2,
+                            bottomMargin=inch / 4,
+                            pagesize=A3)
+    styles = getSampleStyleSheet()
+    styles.add(ParagraphStyle(name='centered', alignment=TA_CENTER))
+    styles.add(ParagraphStyle(name='RightAlign', fontName='Arial', align=TA_RIGHT))
+
+    consultardiadeatencion = []
+    styles = getSampleStyleSheet()
+    header = Paragraph("     Listado de dias", styles['Heading1'])
+    consultardiadeatencion.append(header)
+    headings = ('Dias de atencion')
+    alldiadeatencion = [(d.descripcion_dia) for d in Dia_atencion.objects.all()]
+    print
+    alldiadeatencion
+
+    t = Table([headings] + alldiadeatencion)
+    t.setStyle(TableStyle(
+        [
+            ('GRID', (0, 0), (9, -1), 1, colors.springgreen),
+            ('LINEBELOW', (0, 0), (-1, 0), 2, colors.springgreen),
+            ('BACKGROUND', (0, 0), (-1, 0), colors.springgreen)
+        ]
+    ))
+    consultardiadeatencion.append(t)
+    doc.build(consultardiadeatencion)
+    response.write(buffer.getvalue())
+    buffer.close()
+    return response
+
 #dia de atencion
 def consultardiadeatencion(request):
     buscar = request.GET.get("buscar")
@@ -334,6 +377,49 @@ def eliminardiadeatencion(request, pk, plantilla="eliminardiadeatencion.html"):
 
     return render(request, plantilla, {'form': form})
 
+
+#pdf de horario
+@login_required(None, "", 'login')
+def exportarListHorario(request):
+    # Create a file-like buffer to receive PDF data.
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="lista_Horarios.pdf"'
+
+    buffer = io.BytesIO()
+
+    doc = SimpleDocTemplate(buffer,
+                            rightMargin=inch / 4,
+                            leftMargin=inch / 4,
+                            topMargin=inch / 2,
+                            bottomMargin=inch / 4,
+                            pagesize=A3)
+    styles = getSampleStyleSheet()
+    styles.add(ParagraphStyle(name='centered', alignment=TA_CENTER))
+    styles.add(ParagraphStyle(name='RightAlign', fontName='Arial', align=TA_RIGHT))
+
+    consultarhorario = []
+    styles = getSampleStyleSheet()
+    header = Paragraph("     Listado de horario ", styles['Heading1'])
+    consultarhorario.append(header)
+    headings = ('Hora de entrada', 'Hora de salida')
+    allhorario = [(d.hora_inicio,d.hora_fin) for d in Horario_atencion.objects.all()]
+    print
+    allhorario
+
+    t = Table([headings] + allhorario)
+    t.setStyle(TableStyle(
+        [
+            ('GRID', (0, 0), (9, -1), 1, colors.springgreen),
+            ('LINEBELOW', (0, 0), (-1, 0), 2, colors.springgreen),
+            ('BACKGROUND', (0, 0), (-1, 0), colors.springgreen)
+        ]
+    ))
+    consultarhorario.append(t)
+    doc.build(consultarhorario)
+    response.write(buffer.getvalue())
+    buffer.close()
+    return response
+
 #horario de atenciones
 def consultarhorariodeatencion(request):
     buscar = request.GET.get("buscar")
@@ -388,6 +474,49 @@ def eliminarhorariodeatencion(request, pk, plantilla="eliminarhorariodeatencion.
 
     return render(request, plantilla, {'form': form})
 
+
+#pdf de antecedente
+@login_required(None, "", 'login')
+def exportarListAntecedentes(request):
+    # Create a file-like buffer to receive PDF data.
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="lista_antecedentes.pdf"'
+
+    buffer = io.BytesIO()
+
+    doc = SimpleDocTemplate(buffer,
+                            rightMargin=inch / 4,
+                            leftMargin=inch / 4,
+                            topMargin=inch / 2,
+                            bottomMargin=inch / 4,
+                            pagesize=A3)
+    styles = getSampleStyleSheet()
+    styles.add(ParagraphStyle(name='centered', alignment=TA_CENTER))
+    styles.add(ParagraphStyle(name='RightAlign', fontName='Arial', align=TA_RIGHT))
+
+    consultarantecedentes = []
+    styles = getSampleStyleSheet()
+    header = Paragraph("     Listado de antecedentes ", styles['Heading1'])
+    consultarantecedentes.append(header)
+    headings = ('Descripcion')
+    allantecedente = [(d.descripcion) for d in Antecedente.objects.all()]
+    print
+    allantecedente
+
+    t = Table([headings] + allantecedente)
+    t.setStyle(TableStyle(
+        [
+            ('GRID', (0, 0), (9, -1), 1, colors.springgreen),
+            ('LINEBELOW', (0, 0), (-1, 0), 2, colors.springgreen),
+            ('BACKGROUND', (0, 0), (-1, 0), colors.springgreen)
+        ]
+    ))
+    consultarantecedentes.append(t)
+    doc.build(consultarantecedentes)
+    response.write(buffer.getvalue())
+    buffer.close()
+    return response
+
 #antecedentes
 def consultarantecedentes(request):
     buscar = request.GET.get("buscar")
@@ -438,6 +567,49 @@ def eliminarantecedentes(request, pk, plantilla="eliminarantecedentes.html"):
         antecedente = get_object_or_404(Antecedente, pk=pk)
         form = AntecedenteForm(request.POST or None, instance=antecedente)
     return render(request, plantilla, {'form': form})
+
+
+#pdf de examen
+@login_required(None, "", 'login')
+def exportarListExamen(request):
+    # Create a file-like buffer to receive PDF data.
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="lista_examen.pdf"'
+
+    buffer = io.BytesIO()
+
+    doc = SimpleDocTemplate(buffer,
+                            rightMargin=inch / 4,
+                            leftMargin=inch / 4,
+                            topMargin=inch / 2,
+                            bottomMargin=inch / 4,
+                            pagesize=A3)
+    styles = getSampleStyleSheet()
+    styles.add(ParagraphStyle(name='centered', alignment=TA_CENTER))
+    styles.add(ParagraphStyle(name='RightAlign', fontName='Arial', align=TA_RIGHT))
+
+    consultarexamen = []
+    styles = getSampleStyleSheet()
+    header = Paragraph("     Listado de examenes ", styles['Heading1'])
+    consultarexamen.append(header)
+    headings = ('Examenes')
+    allexamen = [(d.nombre_examen) for d in Examen.objects.all()]
+    print
+    allexamen
+
+    t = Table([headings] + allexamen)
+    t.setStyle(TableStyle(
+        [
+            ('GRID', (0, 0), (9, -1), 1, colors.springgreen),
+            ('LINEBELOW', (0, 0), (-1, 0), 2, colors.springgreen),
+            ('BACKGROUND', (0, 0), (-1, 0), colors.springgreen)
+        ]
+    ))
+    consultarexamen.append(t)
+    doc.build(consultarexamen)
+    response.write(buffer.getvalue())
+    buffer.close()
+    return response
 
 #examenes
 def consultarexamen(request):
@@ -492,7 +664,7 @@ def eliminarexamen(request, pk, plantilla="eliminarexamen.html"):
 
 
 
-#pdf de tratamiento
+#pdf de consulta
 @login_required(None, "", 'login')
 def exportarListConsultas(request):
     # Create a file-like buffer to receive PDF data.
@@ -640,7 +812,47 @@ def eliminarexamenconsulta(request, pk, plantilla="eliminarexamenconsulta.html")
     return render(request, plantilla, {'form': form})
 
 
+#pdf de consulta
+@login_required(None, "", 'login')
+def exportarListHorarioMedico(request):
+    # Create a file-like buffer to receive PDF data.
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="lista_horario.pdf"'
 
+    buffer = io.BytesIO()
+
+    doc = SimpleDocTemplate(buffer,
+                            rightMargin=inch / 4,
+                            leftMargin=inch / 4,
+                            topMargin=inch / 2,
+                            bottomMargin=inch / 4,
+                            pagesize=A4)
+    styles = getSampleStyleSheet()
+    styles.add(ParagraphStyle(name='centered', alignment=TA_CENTER))
+    styles.add(ParagraphStyle(name='RightAlign', fontName='Arial', align=TA_RIGHT))
+
+    consultarhorario = []
+    styles = getSampleStyleSheet()
+    header = Paragraph("     Listado de horario", styles['Heading1'])
+    consultarhorario.append(header)
+    headings = ('Medico','Dia de atencion','Horario de atencion')
+    allhorario= [(d.medico,d.dia_atencion, d.horario_atencion) for d in Horario_medico.objects.all()]
+    print
+    allhorario
+
+    t = Table([headings] + allhorario)
+    t.setStyle(TableStyle(
+        [
+            ('GRID', (0, 0), (9, -1), 1, colors.springgreen),
+            ('LINEBELOW', (0, 0), (-1, 0), 2, colors.springgreen),
+            ('BACKGROUND', (0, 0), (-1, 0), colors.springgreen)
+        ]
+    ))
+    consultarhorario.append(t)
+    doc.build(consultarhorario)
+    response.write(buffer.getvalue())
+    buffer.close()
+    return response
 
 #horario del medico
 def consultarhorariomedico(request, plantilla="consultarhorariomedico.html"):
