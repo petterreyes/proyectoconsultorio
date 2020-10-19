@@ -70,8 +70,9 @@ def medico(request):
         medicos = Medicos.objects.filter(
             Q(apellido__icontains=buscar) |
             Q(nombre__icontains=buscar) |
+            Q(cedula__icontains=buscar) |
             Q(especialidad__icontains=buscar) |
-            Q(edad__icontains=buscar) |
+            Q(fecha_nacimiento__icontains=buscar) |
             Q(sexo__icontains=buscar) |
             Q(email__icontains=buscar)
         ).distinct()
@@ -146,8 +147,8 @@ def exportarListPaciente(request):
     styles = getSampleStyleSheet()
     header = Paragraph("     Listado de Pacientes ", styles['Heading1'])
     consultarpaciente.append(header)
-    headings = ('Nombres', 'Apellido', 'Fecha de nacimiento', 'Cedula', 'Edad', 'Email', 'Sexo','Estado Civil', 'Telefono')
-    allpaciente = [(d.nombre,d.apellido, d.fecha_nacimiento, d.cedula, d.edad, d.email, d.sexo, d.estado_civil, d.telefono) for d in Paciente.objects.all()]
+    headings = ('Nombres', 'Apellido', 'Fecha de nacimiento', 'Cedula', 'Email', 'Sexo','Estado Civil', 'Telefono')
+    allpaciente = [(d.nombre,d.apellido, d.fecha_nacimiento, d.cedula, d.email, d.sexo, d.estado_civil, d.telefono) for d in Paciente.objects.all()]
     print
     allpaciente
 
@@ -175,7 +176,6 @@ def consultarpaciente(request):
             Q(apellido__icontains=buscar) |
             Q(fecha_nacimiento__icontains=buscar) |
             Q(cedula__icontains=buscar) |
-            Q(edad__icontains = buscar) |
             Q(email__icontains=buscar) |
             Q(sexo__icontains=buscar) |
             Q(estado_civil__icontains=buscar)|

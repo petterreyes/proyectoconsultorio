@@ -99,23 +99,21 @@
                     {% endif %}
 
                     {% if user.rolusuario.rol.nombre == "DOCTOR"  %}
-                        <a class="nav-link" href="{% url 'paciente' %}">Pacientes</a>
                         <a class="nav-link" href="{% url 'examen' %}">Examenes</a>
-                        <a class="nav-link" href="{% url 'consulta' %}">Consultas</a>
+                        <a class="nav-link" href="{% url 'consulta' %}">Proximas Consultas</a>
                         <a class="nav-link" href="{% url 'examenconsulta' %}">Agregar examenconsulta</a>
                         <a class="nav-link" href="{% url 'tratamiento' %}">tratamiento</a>
                     {% endif %}
 
                     {% if user.rolusuario.rol.nombre == "DOCTORA"  %}
-                        <a class="nav-link" href="{% url 'paciente' %}">Pacientes</a>
                         <a class="nav-link" href="{% url 'examen' %}">Examenes</a>
-                        <a class="nav-link" href="{% url 'consulta' %}">Consultas</a>
+                        <a class="nav-link" href="{% url 'consulta' %}">Proximas Consultas</a>
                         <a class="nav-link" href="{% url 'examenconsulta' %}">Agregar examenconsulta</a>
                         <a class="nav-link" href="{% url 'tratamiento' %}">tratamiento</a>
                     {% endif %}
 
                     {% if user.rolusuario.rol.nombre == "RECEPCION"%}
-                        <a class="nav-link" href="{% url 'consulta' %}">Registro de consulta</a>
+                        <a class="nav-link" href="{% url 'paciente' %}">Pacientes</a>
                         <a class="nav-link" href="{% url 'reservaciones' %}">Agendar Cita</a>
                     {% endif %}
         <a class="navbar-brand" href="{%  url 'logout' %}">Salir</a>

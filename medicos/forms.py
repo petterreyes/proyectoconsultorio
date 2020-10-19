@@ -186,7 +186,7 @@ class ConsultaForm(forms.ModelForm):
 class Examen_consultaForm(forms.ModelForm):
     class Meta:
         model=Examen_consulta
-        fields=['descripcion','consulta','examen']
+        fields=['descripcion','consulta','examen','paciente']
 
 class Horario_medicoForm(forms.ModelForm):
     class Meta:
@@ -208,7 +208,7 @@ class ReservacionesForm(forms.ModelForm):
 class TratamientoForm(forms.ModelForm):
     class Meta:
         model=Tratamiento
-        fields=['fecha_tratamiento','diagnostico','procedimiento','consulta','medico']
+        fields=['fecha_tratamiento','diagnostico','procedimiento','consulta','medico','paciente']
         widgets = {'fecha_tratamiento': forms.DateInput(format=('%m/%d/%Y'),
                                                         attrs={'placeholder': 'Select a date',
                                                                'type': 'date', 'size': 25}),
