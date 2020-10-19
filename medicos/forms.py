@@ -1,5 +1,5 @@
 from django import forms
-from .models import Medicos, Usuario, Paciente, Dia_atencion, Horario_atencion, Antecedente, Examen
+from .models import Medicos, Paciente, Dia_atencion, Horario_atencion, Antecedente, Examen
 from .models import Consulta, Horario_medico,Reservaciones,Tratamiento, Examen_consulta
 from django.forms import ModelForm
 from datetime import datetime
@@ -24,16 +24,20 @@ class MedicosForm(forms.ModelForm):
                     'placeholder': 'Ingrese un apellido',
                 }
             ),
+            'cedula': forms.TextInput(
+                attrs={
+                    'placeholder': 'Ingrese cedula',
+                }
+            ),
             'especialidad': forms.TextInput(
                 attrs={
                     'placeholder': 'Ingrese su especialidad',
                 }
             ),
-            'edad': forms.TextInput(
-                attrs={
-                    'placeholder': 'Ingrese edad',
-                }
-            ),
+            'fecha_nacimiento': forms.DateInput(format=('%m/%d/%Y'),
+                                                attrs={'placeholder': 'Select a date',
+                                                       'type': 'date', 'size': 30}),
+
             'email': forms.TextInput(
                 attrs={
                     'placeholder': 'Ingrese email',
@@ -41,11 +45,6 @@ class MedicosForm(forms.ModelForm):
             ),
             'sexo': forms.Select()
         }
-
-class UsuarioForm(forms.ModelForm):
-    class Meta:
-        model = Usuario
-        fields = ['nombre', 'apellido','cedula','edad','email','sexo','tipousuario']
 
 class PacienteForm(forms.ModelForm):
     #class Meta:
@@ -70,13 +69,9 @@ class PacienteForm(forms.ModelForm):
                 }
             ),
             'fecha_nacimiento': forms.DateInput(format=('%m/%d/%Y'),
-                                             attrs={'class': 'form-control', 'placeholder': 'Select a date',
+                                             attrs={'placeholder': 'Select a date',
                                                     'type': 'date', 'size':30}),
-            'edad': forms.TextInput(
-                attrs={
-                    'placeholder': 'Ingrese un nombre',
-                }
-            ),
+
             'cedula': forms.TextInput(
                 attrs={
                     'placeholder': 'Ingrese cedula',

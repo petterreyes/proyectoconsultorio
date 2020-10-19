@@ -26,6 +26,10 @@ class UserCreationForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('username', 'email', 'date_of_birth')
+        widgets = {'date_of_birth': forms.DateInput(format=('%m/%d/%Y'),
+                                                        attrs={'placeholder': 'Select a date',
+                                                               'type': 'date', 'size': 25}),
+                   }
 
     def clean_password2(self):
         # Check that the two password entries match

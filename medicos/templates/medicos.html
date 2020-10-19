@@ -15,7 +15,8 @@
         <tr>
             <th>Apellidos</th>
             <th>Nombres</th>
-            <th>Edad</th>
+            <th>Especialidad</th>
+            <th>Fecha de nacimiento</th>
             <th>Email</th>
             <th>Sexo</th>
             <th>Opciones</th>
@@ -26,7 +27,8 @@
         <tr>
             <td>{{ p.apellido }}</td>
             <td>{{ p.nombre }}</td>
-            <td>{{ p.edad }}</td>
+            <td>{{ p.especialidad }}</td>
+            <td>{{ p.fecha_nacimiento }}</td>
             <td>{{ p.email }}</td>
             <td>{{ p.sexo }}</td>
             <td><a class="nav-link" href="{% url 'modificarmedicos' p.id %}">Modificar</a></td>

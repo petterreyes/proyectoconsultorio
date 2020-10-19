@@ -9,12 +9,6 @@ urlpatterns = [
     path('eliminarmedicos/<int:pk>', views.eliminarmedicos, name="eliminarmedicos"),
     path('exportarListMedicos/', views.exportarListMedicos, name="exportarListMedicos"),
 
-    #url de usuarios
-    path('usuario/', views.consultarusuario, name="usuario"),
-    path('crearusuario/', views.crearusuario, name="crearusuario"),
-    path('modificarusuario/<int:pk>', views.modificarusuario, name="modificarusuario"),
-    path('eliminarusuario/<int:pk>', views.eliminarusuario, name="eliminarusuario"),
-
     #url de paciente
     path('paciente/', views.consultarpaciente, name="paciente"),
     path('crearpaciente/', views.crearpaciente, name="crearpaciente"),

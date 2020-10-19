@@ -7,6 +7,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
+
   <title>Consultorio Dental</title>
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
@@ -87,33 +88,33 @@
             </ul>
         </nav><!-- .nav-menu -->
               {% if request.user.is_authenticated %}
-                    <a class="nav-link" href="{% url 'doctores' %}">Doctores</a>
                     {% if user.rolusuario.rol.nombre == "ADMINISTRADOR" or user.rolusuario.rol == "" %}
-                        <a class="nav-link" href="{% url 'medicos' %}"></a>
+                        <a class="nav-link" href="{% url 'medicos' %}">Medicos</a>
+                        <a class="nav-link" href="{% url 'diadeatencion' %}">Días de atencion</a>
+                        <a class="nav-link" href="{% url 'horariodeatencion' %}">Horarios </a>
+                        <a class="nav-link" href="{% url 'horariomedico' %}">Horarios de atencion</a>
                         <a class="nav-link" href="{% url 'consultar_usuarios' %}">Usuarios</a>
                         <a class="nav-link" href="{% url 'consultar_roles' %}">Roles</a>
                         <a class="nav-link" href="{% url 'consultar_roles_usuarios' %}">Roles y Usuarios</a>
                     {% endif %}
-                    {% if user.rolusuario.rol.nombre == "ODONTOLOGO"  %}
-                        <a class="nav-link" href="{% url 'paciente' %}">Paciente</a>
-                        <a class="nav-link" href="{% url 'diadeatencion' %}">Días de atencion</a>
-                        <a class="nav-link" href="{% url 'horariodeatencion' %}">Horarios de atencion</a>
-                        <a class="nav-link" href="{% url 'tratamiento' %}">Agregar nuevo tratamiento</a>
-                    {% endif %}
-                    {% if user.rolusuario.rol.nombre == "AUXILIAR"%}
-                        <a class="nav-link" href="{% url 'paciente' %}">Paciente</a>
-                        <a class="nav-link" href="{% url 'diadeatencion' %}">Días de atencion</a>
-                        <a class="nav-link" href="{% url 'examen' %}">Agregar examen</a>
+
+                    {% if user.rolusuario.rol.nombre == "DOCTOR"  %}
+                        <a class="nav-link" href="{% url 'paciente' %}">Pacientes</a>
+                        <a class="nav-link" href="{% url 'examen' %}">Examenes</a>
+                        <a class="nav-link" href="{% url 'consulta' %}">Consultas</a>
                         <a class="nav-link" href="{% url 'examenconsulta' %}">Agregar examenconsulta</a>
+                        <a class="nav-link" href="{% url 'tratamiento' %}">tratamiento</a>
                     {% endif %}
-                    {% if user.rolusuario.rol.nombre == "ODONTOPEDIATRA"  %}
-                        <a class="nav-link" href="{% url 'paciente' %}">Paciente</a>
-                        <a class="nav-link" href="{% url 'diadeatencion' %}">Días de atencion</a>
-                        <a class="nav-link" href="{% url 'horariodeatencion' %}">Horarios de atencion</a>
-                        <a class="nav-link" href="{% url 'tratamiento' %}">Agregar nuevo tratamiento</a>
+
+                    {% if user.rolusuario.rol.nombre == "DOCTORA"  %}
+                        <a class="nav-link" href="{% url 'paciente' %}">Pacientes</a>
+                        <a class="nav-link" href="{% url 'examen' %}">Examenes</a>
+                        <a class="nav-link" href="{% url 'consulta' %}">Consultas</a>
+                        <a class="nav-link" href="{% url 'examenconsulta' %}">Agregar examenconsulta</a>
+                        <a class="nav-link" href="{% url 'tratamiento' %}">tratamiento</a>
                     {% endif %}
+
                     {% if user.rolusuario.rol.nombre == "RECEPCION"%}
-                        <a class="nav-link" href="{% url 'paciente' %}">Paciente</a>
                         <a class="nav-link" href="{% url 'consulta' %}">Registro de consulta</a>
                         <a class="nav-link" href="{% url 'reservaciones' %}">Agendar Cita</a>
                     {% endif %}

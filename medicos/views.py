@@ -32,7 +32,7 @@ def exportarListMedicos(request):
                             leftMargin=inch / 4,
                             topMargin=inch / 2,
                             bottomMargin=inch / 4,
-                            pagesize=A4)
+                            pagesize=A3)
     styles = getSampleStyleSheet()
     styles.add(ParagraphStyle(name='centered', alignment=TA_CENTER))
     styles.add(ParagraphStyle(name='RightAlign', fontName='Arial', align=TA_RIGHT))
@@ -41,8 +41,8 @@ def exportarListMedicos(request):
     styles = getSampleStyleSheet()
     header = Paragraph("     Listado de medicos", styles['Heading1'])
     medicos.append(header)
-    headings = ('Apellido', 'Nombres', 'Edad', 'Email', 'Sexo')
-    allmedicos = [(d.apellido, d.nombre, d.edad, d.email, d.sexo) for d in Medicos.objects.all()]
+    headings = ('Apellido', 'Nombres', 'Cedula', 'Especialidad', 'Fecha de nacimiento', 'Email', 'Sexo')
+    allmedicos = [(d.apellido, d.nombre, d.cedula, d.especialidad, d.fecha_nacimiento, d.email, d.sexo) for d in Medicos.objects.all()]
     print
     allmedicos
 
@@ -122,57 +122,6 @@ def eliminarmedicos(request, pk, plantilla="eliminarmedicos.html"):
 
     return render(request, plantilla, {'form': form})
 
-#consulta de USUARIOS
-def consultarusuario(request, plantilla="consultarusuario.html"):
-    usuario = Usuario.objects.all()
-    data = {
-        'usuario':usuario
-    }
-    return render(request, plantilla, data)
-
-#pagina de crear o insertar INSERT
-def crearusuario(request, plantilla="crearusuarios.html"):
-
-    if request.method == "POST":
-        form = UsuarioForm((request.POST or None))
-        if form.is_valid():
-            form.save()
-            return redirect('usuario')
-    else:
-        form = UsuarioForm
-
-    return render(request, plantilla, {'form': form})
-
-#pagina de modificar
-def modificarusuario(request, pk, plantilla="modificarusuario.html"):
-    if request.method == "POST":
-        usuario = get_object_or_404(Usuario, pk=pk)
-        form = UsuarioForm(request.POST or None, instance=usuario)
-        if form.is_valid():
-            form.save()
-        return redirect('usuario')
-    else:
-        usuario = get_object_or_404(Usuario, pk=pk)
-        form = UsuarioForm(request.POST or None, instance=usuario)
-
-
-
-    return render(request, plantilla, {'form': form})
-
-#pagina de eliminar
-def eliminarusuario(request, pk, plantilla="eliminarusuario.html"):
-
-    if request.method == "POST":
-        form = UsuarioForm((request.POST or None))
-        usuario = get_object_or_404(Usuario, pk=pk)
-        if form.is_valid():
-            usuario.delete()
-            return redirect('usuario')
-    else:
-        usuario = get_object_or_404(Usuario, pk=pk)
-        form = UsuarioForm(request.POST or None, instance=usuario)
-
-    return render(request, plantilla, {'form': form})
 
 #pdf de paciente
 @login_required(None, "", 'login')

@@ -1,9 +1,8 @@
 from django.contrib import admin
-from .models import Medicos, Usuario, Paciente, Dia_atencion, Horario_atencion, Antecedente, Examen
+from .models import Medicos, Paciente, Dia_atencion, Horario_atencion, Antecedente, Examen
 from .models import Consulta, Horario_medico, Reservaciones, Tratamiento, Examen_consulta
 # Register your models here.
 admin.site.register(Medicos)
-admin.site.register(Usuario)
 admin.site.register(Paciente)
 admin.site.register(Dia_atencion)
 admin.site.register(Horario_atencion)

@@ -8,8 +8,9 @@ from medicos.choices import gender_choices
 class Medicos(models.Model):
     nombre = models.CharField(blank=False, max_length=200)
     apellido = models.CharField(max_length=200)
+    cedula = models.CharField(max_length=13)
     especialidad = models.CharField(max_length=200)
-    edad = models.IntegerField()
+    fecha_nacimiento = models.DateField()
     email = models.EmailField()
     sexo = models.CharField(choices=gender_choices, default='male',max_length=21)
     estado = models.IntegerField(default=1) #1 si esta activo y 2 si esta eliminado
@@ -26,35 +27,11 @@ class Medicos(models.Model):
     def __str__(self):
         return self.apellido + ' ' + self.nombre + ' ' + self.especialidad
 
-
-class Usuario(models.Model):
-    nombre = models.CharField(blank=False, max_length=200)
-    apellido = models.CharField(max_length=200)
-    cedula = models.CharField(max_length=200)
-    edad = models.IntegerField()
-    email = models.EmailField()
-    sexo = models.CharField(choices=gender_choices, default='male',max_length=21)
-    tipousuario = models.CharField(max_length=200)
-    estado = models.IntegerField(default=1)  # 1 si esta activo y 2 si esta eliminado
-    #user = models.CharField(max_length=15)
-    #usermod = models.CharField(max_length=15)
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        db_table = "tr_usuario"
-        verbose_name = "usuario"
-        verbose_name_plural = "usuarios"
-
-    def __str__(self):
-        return self.apellido + ' ' + self.nombre
-
 class Paciente(models.Model):
     nombre = models.CharField(blank=False, max_length=200)
     apellido = models.CharField(max_length=200)
     fecha_nacimiento = models.DateField()
     cedula = models.CharField(max_length=13)
-    edad = models.IntegerField()
     email = models.EmailField()
     sexo = models.CharField(choices=gender_choices, default='male',max_length=21)
     estado_civil = models.CharField(max_length=20)
